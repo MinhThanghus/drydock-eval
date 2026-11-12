@@ -1,0 +1,34 @@
+drydock-eval
+Copyright 2026 The drydock-eval Authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes a modified copy of the default seccomp profile of the
+Moby project: drydock_eval/contain/reference/lib/seccomp_g4s_d41.json is
+derived from seccomp/default.json of github.com/moby/profiles (module version
+v0.2.3), which is licensed under the Apache License, Version 2.0.
+
+The profile originates in the Moby project (github.com/moby/moby), whose NOTICE
+file reads:
+
+    Docker
+    Copyright 2012-2017 Docker, Inc.
+
+    This product includes software developed at Docker, Inc.
+    (https://www.docker.com).
+
+At the time of packaging, the repository github.com/moby/profiles had no NOTICE
+file of its own, and the profile file carries no copyright line. The text above
+is the notice of the Moby project and is carried here as the nearest upstream
+attribution. The Moby NOTICE also names two other components; neither is part
+of this product.
+
+Changes made to the profile: the Linux native AIO system calls (io_setup,
+io_destroy, io_submit, io_cancel, io_getevents, io_pgetevents and
+io_pgetevents_time64) were removed from the allow rules, and one rule was added
+that returns EPERM for them and for io_uring_setup, io_uring_enter and
+io_uring_register. The derivation is reproducible with
+drydock_eval/contain/reference/tools/make_seccomp_d41.py; the added rule is the
+last entry of "syscalls" in the profile. The profile file itself is shipped
+byte for byte as generated, because the contained runner pins its sha256, so
+this statement of change lives here and not inside the file.

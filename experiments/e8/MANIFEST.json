@@ -1,0 +1,88 @@
+{
+ "_license": "Copyright 2026 The drydock-eval Authors. SPDX-License-Identifier: Apache-2.0",
+ "_about": "Byte copies listed here are exempt from the licence-header check only (their bytes must not change) and are scanned by every other rule. panel_E8.json is a verbatim copy of the frozen file. The files under redacted/ are byte copies of the REDACTED files (verbatim: true means: exactly the bytes whose sha256 is listed; redacted: true means: not the frozen file, original_sha256 names the frozen file; see redacted/README.md). All are licensed under Apache-2.0 like the rest of the kit.",
+ "files": [
+  {
+   "path": "panel_E8.json",
+   "sha256": "f03c0b93f529f6c781e26fec67abe30dcfbf49bcb031cdf5a273614eb7c90857",
+   "verbatim": true
+  },
+  {
+   "path": "redacted/FREEZE_RECORD.redacted.md",
+   "sha256": "fa0020f3b1b8279aaf5932340426f578e7c8e4ea207aef0f8f45cdf7b9a9d530",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "981445584ecaf16ac2a98439494c37cd8216afa547d912db5b22d9f93e4fcd54"
+  },
+  {
+   "path": "redacted/LEAD_DECISIONS.redacted.md",
+   "sha256": "0dd9d6e38314170d5be2e46567e2a6c2abe4406cff58e717001d20f5f261b553",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "4a652573b046d78933b6e51bf1b8f0925242121538ef455672d92f9fddcd040b"
+  },
+  {
+   "path": "redacted/PROTOCOL.redacted.md",
+   "sha256": "95dcffcbbd3c67d10b41dcdc0205b8ed68e46ef1dc9dd57be09055895855d8cd",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "070c9655d96372d054f430727259de7b25af2ca93c3ec4c9295dfdc37aeb8cf4"
+  },
+  {
+   "path": "redacted/RUN_RECORD_SPEC_pinned.redacted.md",
+   "sha256": "6a738c4d02ed604f700ef8850d81e3cd2eacea90be9c55c211e0ac6edaf671c5",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "258c9246c8461aa57b2045ee6a95443eb4e9035b014f76391e8d405f5aa897f8"
+  },
+  {
+   "path": "redacted/analyze_e7_pinned.redacted.py",
+   "sha256": "17825c1b712a59624d940e555623d999d26547d4cc25a8b9322c8ff997fd50b0",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "e86ccd811424e98462f9696d1e977d780108dc68b9dea6cea47d88053613b50c"
+  },
+  {
+   "path": "redacted/analyze_e8.redacted.py",
+   "sha256": "16a80a2a92ff9916fd061b0e10e73c4df80c7ccb62c0241d01ca74de9931f2f7",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "16a80a2a92ff9916fd061b0e10e73c4df80c7ccb62c0241d01ca74de9931f2f7"
+  },
+  {
+   "path": "redacted/e8_arms.redacted.json",
+   "sha256": "dea12b0c3559eef90defd1a5743b9f84dbcd45ee3512d6abef757f3ec286552e",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "f0ca2eb83d4727942887e21ab68abfe03b885d2e6324da8918e6b33faf461afe"
+  },
+  {
+   "path": "redacted/make_jobs_e8.redacted.py",
+   "sha256": "3c4fd1402ed14fbab4e4a42f9f33d2d84ec90d37e2e3e7923937c519aec75982",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "b101bc6b012c673f4a5078cb140a30a53720ffeb9d55d83dcd6bd4f1a7bcc83c"
+  },
+  {
+   "path": "redacted/manip_check_e8.redacted.py",
+   "sha256": "c392e0d71580120da805b8d416188b84898cb5a04969a2f2ac6287b785c70baf",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "b075ed73acea92e95ef2ac91d9bf1d00d115fd957dae7e0baaa5e065651d0c16"
+  },
+  {
+   "path": "redacted/test_analyze_e8.redacted.py",
+   "sha256": "2e0b802aa15dbe213f17f0b610d802a24d5ee37f52028d57bb9e627721329be8",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "b2c0aa1d628890a7b8de41b3c1d030e9a91887b200239ab0d680fac8f5084d05"
+  },
+  {
+   "path": "redacted/test_manip_check_e8.redacted.py",
+   "sha256": "b9baa5dd1e6133edbea94faf7c555188d77adb3a1f71bc124dc922c21dd06b98",
+   "verbatim": true,
+   "redacted": true,
+   "original_sha256": "8a5539964bc0040d02cad2f25f88f32e56f91208539504cf099c1dcda1d1bf97"
+  }
+ ]
+}

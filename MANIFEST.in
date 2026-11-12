@@ -1,0 +1,15 @@
+# Copyright 2026 The drydock-eval Authors
+# SPDX-License-Identifier: Apache-2.0
+# The source distribution holds the package, its tests, the release-check script, the E8 pre-registration files (panel and redacted copies), README
+# LICENSE and NOTICE. The authors' write-up and review records live outside this tree; scripts/release_check.py fails if
+# internal files come back. PROVENANCE.json and BUILD_REPORT.md are the authors' build records: never shipped.
+include LICENSE NOTICE README.md pyproject.toml .gitignore
+recursive-include tests *.py
+recursive-include tests/data *.json
+recursive-include scripts *.py
+recursive-include experiments *.md *.json *.py
+recursive-include drydock_eval/contain GUIDE.md SOURCES.json
+recursive-include drydock_eval/contain/reference *.py *.sh *.json Dockerfile
+exclude PROVENANCE.json BUILD_REPORT.md
+prune .venv
+global-exclude __pycache__ *.py[cod]

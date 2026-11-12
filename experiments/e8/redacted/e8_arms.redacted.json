@@ -1,0 +1,84 @@
+{
+ "adk_version": "1.36.1",
+ "arm_order": [
+  "F",
+  "R",
+  "C",
+  "H",
+  "T"
+ ],
+ "arms": {
+  "C": {
+   "compaction_config": null,
+   "factor": "no compaction: events_compaction_config left unset (the swegemma default)",
+   "history_reasoning": "echo",
+   "request_chat_template_sha256": null,
+   "request_model": "openai//kaggle/input/models/google/gemma-4/other/gemma-4-e4b-it-qat-w4a16-ct/2"
+  },
+  "F": {
+   "compaction_config": {
+    "compaction_interval": 15,
+    "event_retention_size": 5,
+    "overlap_size": 2,
+    "token_threshold": 14336
+   },
+   "factor": "none: the scorer path (Kaggle model string, role tool, scorer compaction, reasoning mirrored into reasoning and reasoning_content, Kaggle-v2 template from the model directory)",
+   "history_reasoning": "echo",
+   "request_chat_template_sha256": null,
+   "request_model": "openai//kaggle/input/models/google/gemma-4/other/gemma-4-e4b-it-qat-w4a16-ct/2"
+  },
+  "H": {
+   "compaction_config": {
+    "compaction_interval": 15,
+    "event_retention_size": 5,
+    "overlap_size": 2,
+    "token_threshold": 14336
+   },
+   "factor": "history thoughts absent: reasoning and reasoning_content stripped from every assistant message at litellm.acompletion (outermost wrapper), the prompt of a client without the reasoning mirror",
+   "history_reasoning": "strip",
+   "request_chat_template_sha256": null,
+   "request_model": "openai//kaggle/input/models/google/gemma-4/other/gemma-4-e4b-it-qat-w4a16-ct/2"
+  },
+  "R": {
+   "compaction_config": {
+    "compaction_interval": 15,
+    "event_retention_size": 5,
+    "overlap_size": 2,
+    "token_threshold": 14336
+   },
+   "factor": "tool-result role: the request model string contains 'gemma4', so google-adk 1.36.1 sends tool results with role 'tool_responses'",
+   "history_reasoning": "echo",
+   "request_chat_template_sha256": null,
+   "request_model": "openai/google/gemma4-e4b-it"
+  },
+  "T": {
+   "compaction_config": {
+    "compaction_interval": 15,
+    "event_retention_size": 5,
+    "overlap_size": 2,
+    "token_threshold": 14336
+   },
+   "factor": "chat template: the Hugging Face canonical E4B template, sent per request as chat_template (rows and dumps record only its sha256)",
+   "history_reasoning": "echo",
+   "request_chat_template_sha256": "0a2c8073c878ab1da004bee933a998606537bbb62016310352c7285c3f01c5b5",
+   "request_model": "openai//kaggle/input/models/google/gemma-4/other/gemma-4-e4b-it-qat-w4a16-ct/2"
+  }
+ },
+ "arms_version": 1,
+ "bundle": "BUNDLE_A",
+ "experiment": "E8",
+ "family": [
+  "R",
+  "C",
+  "H",
+  "T"
+ ],
+ "reference_arm": "F",
+ "repeats": 4,
+ "served_model_names": [
+  "/kaggle/input/models/google/gemma-4/other/gemma-4-e4b-it-qat-w4a16-ct/2",
+  "google/gemma4-e4b-it"
+ ],
+ "server_chat_template_sha256": "33204f1acb5bd0002713e16a593847f24ceeafe711ed88bda2a352dc996a3373",
+ "trust_request_chat_template": true
+}

@@ -1,0 +1,85 @@
+{#-
+  Copyright 2026 The drydock-eval Authors
+  SPDX-License-Identifier: Apache-2.0
+
+  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
+  with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
+  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+  the specific language governing permissions and limitations under the License.
+
+  drydock-eval toy chat template. An original, simplified stand-in written for the kit's tests, mock server and mutation
+  suite. It reproduces only the behaviours the conformance checks care about, using the turn markers of the public
+  Gemma 4 prompt format:
+    1. a tool result with role "tool" is rendered inline after the call that produced it; any other role (for
+       example "tool_responses") opens a turn of its own;
+    2. a history thought is rendered only for tool-calling assistant turns after the last user message;
+    3. that thought is rendered verbatim and followed by "\n<channel|>", so a thought that already ends with a
+       newline gives "\n\n<channel|>".
+  It is NOT the Kaggle chat template and must never be used to judge real prompts.
+-#}
+{%- macro text_of(content) -%}
+  {%- if content is string -%}
+    {{- content -}}
+  {%- elif content is iterable and content is not mapping -%}
+    {%- for part in content -%}
+      {%- if part.type == 'text' -%}{{- part.text -}}{%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endmacro -%}
+{{- bos_token -}}
+{%- set msgs = messages -%}
+{%- set has_system = (msgs | length > 0) and msgs[0].role == 'system' -%}
+{%- if enable_thinking or tools or has_system -%}
+  {{- '<|turn>system\n' -}}
+  {%- if enable_thinking -%}
+    {{- '<|think|>\n' -}}
+  {%- endif -%}
+  {%- if has_system -%}
+    {{- text_of(msgs[0].content) | trim -}}
+  {%- endif -%}
+  {%- for tool in tools or [] -%}
+    {{- '<|tool>' + tool.function.name + ':' + (tool.function | tojson) + '<tool|>' -}}
+  {%- endfor -%}
+  {{- '<turn|>\n' -}}
+{%- endif -%}
+{%- if has_system -%}
+  {%- set msgs = msgs[1:] -%}
+{%- endif -%}
+{%- set ns = namespace(last_user=-1) -%}
+{%- for m in msgs -%}
+  {%- if m.role == 'user' -%}
+    {%- set ns.last_user = loop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- for m in msgs -%}
+  {%- if m.role == 'tool' -%}
+    {#- rendered inline by the assistant turn that called it -#}
+  {%- elif m.role == 'assistant' -%}
+    {{- '<|turn>model\n' -}}
+    {%- set thought = m.reasoning or m.reasoning_content -%}
+    {%- if thought and m.tool_calls and loop.index0 > ns.last_user -%}
+      {{- '<|channel>thought\n' + thought + '\n<channel|>' -}}
+    {%- endif -%}
+    {%- for call in m.tool_calls or [] -%}
+      {{- '<|tool_call>call:' + call.function.name + (call.function.arguments | tojson) + '<tool_call|>' -}}
+    {%- endfor -%}
+    {%- if m.tool_calls -%}
+      {%- set scan = namespace(open=true) -%}
+      {%- for k in range(loop.index0 + 1, msgs | length) -%}
+        {%- if scan.open and msgs[k].role == 'tool' -%}
+          {{- '<|tool_response>' + text_of(msgs[k].content) + '<tool_response|>' -}}
+        {%- else -%}
+          {%- set scan.open = false -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    {{- text_of(m.content) | trim -}}
+    {{- '<turn|>\n' -}}
+  {%- else -%}
+    {{- '<|turn>' + m.role + '\n' + (text_of(m.content) | trim) + '<turn|>\n' -}}
+  {%- endif -%}
+{%- endfor -%}
+{%- if add_generation_prompt -%}
+  {{- '<|turn>model\n' -}}
+{%- endif -%}

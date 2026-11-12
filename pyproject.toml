@@ -1,0 +1,71 @@
+# Copyright 2026 The drydock-eval Authors
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drydock-eval"
+version = "0.4.0"
+description = "drydock-eval: safety and fidelity kit for evaluating Gemma 4 coding agents locally (contained runner reference, Kaggle-scorer conformance checks, paired comparison rule)"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = [
+  "jinja2>=3.1",
+  "tomli>=1.1; python_version < '3.11'",  # --profile my.toml on Python 3.10
+]
+
+[project.optional-dependencies]
+# Load a Hugging Face tokenizer.json for the template-identity check.
+hf = ["tokenizers>=0.19"]
+# Live demos and the live mutation tier run a real google-adk agent. 1.36.1 is the version
+# the competition harness ships; litellm 1.82.4 / openai 2.32.0 are the versions a Kaggle run logged.
+adk = ["google-adk==1.36.1", "litellm==1.82.4", "openai==2.32.0"]
+# drydock-eval compare: the pass rule, the sign-flip tests and their simulators.
+compare = ["numpy>=1.26"]
+# drydock-eval contain needs no Python package beyond the standard library. Running containers needs Docker, and agent
+# runs need a vLLM server and your own copy of the competition harness: see `drydock-eval contain guide`.
+contain = []
+test = ["pytest>=8", "numpy>=1.26"]
+
+[project.scripts]
+drydock-eval = "drydock_eval.cli:main"
+
+[tool.setuptools]
+# the licence and the notice that Apache-2.0 section 4 asks to carry (the seccomp profile is derived from the Moby project)
+license-files = ["LICENSE", "NOTICE"]
+
+[tool.setuptools.packages.find]
+include = ["drydock_eval*"]
+
+[tool.setuptools.package-data]
+"drydock_eval.conform" = ["data/*.jinja", "data/*.json"]
+# the reference tree is data, not an importable package: scripts, the container build files and the seccomp profile
+"drydock_eval.contain" = ["GUIDE.md", "SOURCES.json", "reference/**/*.py", "reference/**/*.sh", "reference/**/*.json",
+                          "reference/**/Dockerfile"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "live: runs a real google-adk agent against the local mock server (needs the [adk] extra)",
+  "docker: needs a Docker daemon and a deployment of the contain reference tree (skipped without them)",
+  "slow: takes tens of seconds on one core (deselect with -m 'not slow')",
+]
+filterwarnings = [
+  "ignore:.*EXPERIMENTAL.*:UserWarning",
+  "ignore::DeprecationWarning",
+]

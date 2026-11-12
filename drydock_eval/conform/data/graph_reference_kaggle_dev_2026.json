@@ -1,0 +1,442 @@
+{
+ "_license": "Copyright 2026 The drydock-eval Authors. SPDX-License-Identifier: Apache-2.0",
+ "_note": "Statistics only. Computed with 'drydock-eval conform graph-ref' from the 127 graph/embedding pairs of the Gemma 4 agent competition's public dev tasks (4 repositories). No graph, vector, node name or file name is included, and the files themselves are not shipped. Values are [min, median, max] over files.",
+ "format": "drydock-eval graph reference 1",
+ "name": "kaggle-dev-2026",
+ "created": "2026-11-09",
+ "kit_version": "0.2.0",
+ "source": "the 127 graph/embedding pairs of the competition's public dev tasks (files not shipped)",
+ "method": {
+  "pairs": 20000,
+  "edge_pairs": 5000,
+  "queries": 200,
+  "k": 10,
+  "seed": 0,
+  "values": "[min, median, max] over files"
+ },
+ "pairs_found": 127,
+ "unpaired": {
+  "graph_only": 0,
+  "embeddings_only": 0
+ },
+ "align_status": {
+  "PASS": 127
+ },
+ "pooled": {
+  "files": 127,
+  "nodes": [
+   711,
+   3255.0,
+   4597
+  ],
+  "norm_min": [
+   3.6512,
+   3.6648,
+   3.7124
+  ],
+  "norm_median": [
+   3.8906,
+   3.9127,
+   5.629
+  ],
+  "norm_max": [
+   8.3537,
+   9.0214,
+   9.0214
+  ],
+  "rand_cos_mean": [
+   0.763,
+   0.7896,
+   0.9016
+  ],
+  "rand_cos_sd": [
+   0.0951,
+   0.1957,
+   0.2121
+  ],
+  "rand_cos_p05": [
+   0.3489,
+   0.3634,
+   0.7091
+  ],
+  "rand_cos_p50": [
+   0.833,
+   0.8476,
+   0.9411
+  ],
+  "rand_cos_p95": [
+   0.9935,
+   0.9952,
+   0.9975
+  ],
+  "rand_cos_ge_099": [
+   0.0704,
+   0.0882,
+   0.1885
+  ],
+  "edge_auc": [
+   0.8434,
+   0.9246,
+   0.9438
+  ],
+  "top10_sim_median": [
+   0.9985,
+   0.9993,
+   0.9997
+  ],
+  "top1_sim_median": [
+   0.9999,
+   1.0,
+   1.0
+  ],
+  "top10_neighbour_share": [
+   0.018,
+   0.0569,
+   0.1056
+  ],
+  "top10_neighbour_chance": [
+   0.0003,
+   0.0008,
+   0.0049
+  ],
+  "shared_vector_share": [
+   0.0,
+   0.2246,
+   0.3752
+  ]
+ },
+ "groups": {
+  "fastapi": {
+   "files": 67,
+   "nodes": [
+    3238,
+    3931.0,
+    4597
+   ],
+   "norm_min": [
+    3.6512,
+    3.6648,
+    3.6648
+   ],
+   "norm_median": [
+    3.8906,
+    3.9127,
+    3.9127
+   ],
+   "norm_max": [
+    9.0214,
+    9.0214,
+    9.0214
+   ],
+   "rand_cos_mean": [
+    0.763,
+    0.7779,
+    0.7934
+   ],
+   "rand_cos_sd": [
+    0.1941,
+    0.199,
+    0.2121
+   ],
+   "rand_cos_p05": [
+    0.3489,
+    0.3561,
+    0.3683
+   ],
+   "rand_cos_p50": [
+    0.833,
+    0.8381,
+    0.8505
+   ],
+   "rand_cos_p95": [
+    0.9935,
+    0.9945,
+    0.9964
+   ],
+   "rand_cos_ge_099": [
+    0.0704,
+    0.0788,
+    0.09
+   ],
+   "edge_auc": [
+    0.924,
+    0.9359,
+    0.9438
+   ],
+   "top10_sim_median": [
+    0.9991,
+    0.9994,
+    0.9996
+   ],
+   "top1_sim_median": [
+    0.9999,
+    1.0,
+    1.0
+   ],
+   "top10_neighbour_share": [
+    0.0379,
+    0.0678,
+    0.1056
+   ],
+   "top10_neighbour_chance": [
+    0.0003,
+    0.0005,
+    0.0011
+   ],
+   "shared_vector_share": [
+    0.2188,
+    0.3407,
+    0.3752
+   ]
+  },
+  "httpx": {
+   "files": 1,
+   "nodes": [
+    740,
+    740.0,
+    740
+   ],
+   "norm_min": [
+    3.6997,
+    3.6997,
+    3.6997
+   ],
+   "norm_median": [
+    5.629,
+    5.629,
+    5.629
+   ],
+   "norm_max": [
+    8.3537,
+    8.3537,
+    8.3537
+   ],
+   "rand_cos_mean": [
+    0.8707,
+    0.8707,
+    0.8707
+   ],
+   "rand_cos_sd": [
+    0.1419,
+    0.1419,
+    0.1419
+   ],
+   "rand_cos_p05": [
+    0.604,
+    0.604,
+    0.604
+   ],
+   "rand_cos_p50": [
+    0.9411,
+    0.9411,
+    0.9411
+   ],
+   "rand_cos_p95": [
+    0.9975,
+    0.9975,
+    0.9975
+   ],
+   "rand_cos_ge_099": [
+    0.1885,
+    0.1885,
+    0.1885
+   ],
+   "edge_auc": [
+    0.8527,
+    0.8527,
+    0.8527
+   ],
+   "top10_sim_median": [
+    0.9997,
+    0.9997,
+    0.9997
+   ],
+   "top1_sim_median": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "top10_neighbour_share": [
+    0.0249,
+    0.0249,
+    0.0249
+   ],
+   "top10_neighbour_chance": [
+    0.0022,
+    0.0022,
+    0.0022
+   ],
+   "shared_vector_share": [
+    0.0297,
+    0.0297,
+    0.0297
+   ]
+  },
+  "requests": {
+   "files": 12,
+   "nodes": [
+    711,
+    733.0,
+    759
+   ],
+   "norm_min": [
+    3.7124,
+    3.7124,
+    3.7124
+   ],
+   "norm_median": [
+    5.3588,
+    5.3673,
+    5.4127
+   ],
+   "norm_max": [
+    8.6609,
+    8.6609,
+    8.6609
+   ],
+   "rand_cos_mean": [
+    0.8545,
+    0.86,
+    0.8638
+   ],
+   "rand_cos_sd": [
+    0.1394,
+    0.1408,
+    0.1426
+   ],
+   "rand_cos_p05": [
+    0.5672,
+    0.5739,
+    0.579
+   ],
+   "rand_cos_p50": [
+    0.9053,
+    0.911,
+    0.9177
+   ],
+   "rand_cos_p95": [
+    0.9951,
+    0.9956,
+    0.9962
+   ],
+   "rand_cos_ge_099": [
+    0.1058,
+    0.1153,
+    0.1281
+   ],
+   "edge_auc": [
+    0.8952,
+    0.899,
+    0.9051
+   ],
+   "top10_sim_median": [
+    0.9985,
+    0.9989,
+    0.9992
+   ],
+   "top1_sim_median": [
+    0.9999,
+    1.0,
+    1.0
+   ],
+   "top10_neighbour_share": [
+    0.0532,
+    0.0632,
+    0.0867
+   ],
+   "top10_neighbour_chance": [
+    0.0028,
+    0.0034,
+    0.0049
+   ],
+   "shared_vector_share": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "rich": {
+   "files": 47,
+   "nodes": [
+    1920,
+    1969.0,
+    2021
+   ],
+   "norm_min": [
+    3.6679,
+    3.6679,
+    3.6679
+   ],
+   "norm_median": [
+    4.3872,
+    4.4022,
+    4.4458
+   ],
+   "norm_max": [
+    8.6537,
+    8.6537,
+    8.6537
+   ],
+   "rand_cos_mean": [
+    0.8975,
+    0.9001,
+    0.9016
+   ],
+   "rand_cos_sd": [
+    0.0951,
+    0.0966,
+    0.0987
+   ],
+   "rand_cos_p05": [
+    0.6946,
+    0.7035,
+    0.7091
+   ],
+   "rand_cos_p50": [
+    0.9319,
+    0.9336,
+    0.9357
+   ],
+   "rand_cos_p95": [
+    0.9949,
+    0.9952,
+    0.9955
+   ],
+   "rand_cos_ge_099": [
+    0.108,
+    0.1141,
+    0.1205
+   ],
+   "edge_auc": [
+    0.8434,
+    0.8485,
+    0.8537
+   ],
+   "top10_sim_median": [
+    0.9992,
+    0.9993,
+    0.9994
+   ],
+   "top1_sim_median": [
+    0.9999,
+    0.9999,
+    1.0
+   ],
+   "top10_neighbour_share": [
+    0.018,
+    0.0269,
+    0.0415
+   ],
+   "top10_neighbour_chance": [
+    0.0011,
+    0.0014,
+    0.0027
+   ],
+   "shared_vector_share": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ }
+}

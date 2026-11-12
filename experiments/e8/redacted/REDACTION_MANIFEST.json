@@ -1,0 +1,1249 @@
+{
+ "_license": "Copyright 2026 The drydock-eval Authors. SPDX-License-Identifier: Apache-2.0",
+ "_about": "Redaction manifest of the E8 pre-registration package. The redacted files are NOT the frozen files. The sha256 values that the paper cites are those of the originals (original_sha256). The originals will be released byte for byte on 2026-12-03.",
+ "paper_cites_protocol_sha256": "070c9655d96372d054f430727259de7b25af2ca93c3ec4c9295dfdc37aeb8cf4",
+ "originals_release_date": "2026-12-03",
+ "method": "Literal, whole-token substitutions from one table, one pass, longest string first; whole token = no ASCII letter directly before or after. No line is added or removed. The passages listed under 'cuts' (private prose) are replaced by a visible marker '[redacted: N words, category]' (N = the original passage's word count; a passage that spans lines leaves the marker on its first line and blank lines after it, so no line number moves). Applied by redact_e8.py to the original bytes. The list of cuts gives counts only, no text.",
+ "placeholders": [
+  {
+   "placeholder": "FOLDER_RUNNER_SRC",
+   "meaning": "folder name: the source mirror of the container runner, as it appears in paths",
+   "occurrences_in_all_files": 16
+  },
+  {
+   "placeholder": "FOLDER_RUNNER_EVAL",
+   "meaning": "folder name: the runner's evaluation folder, as it appears in paths",
+   "occurrences_in_all_files": 15
+  },
+  {
+   "placeholder": "FOLDER_OUT_DOCKER",
+   "meaning": "folder name: output folder of the earlier Docker parity runs",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "FOLDER_OUT_D42",
+   "meaning": "folder name: output folder of the D4.2 runner version",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "FOLDER_OUT_D4",
+   "meaning": "folder name: output folder of the D4 runner version",
+   "occurrences_in_all_files": 4
+  },
+  {
+   "placeholder": "FOLDER_E7",
+   "meaning": "folder name: the E7 experiment's folder",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "FOLDER_E6",
+   "meaning": "folder name: the E6 experiment's folder",
+   "occurrences_in_all_files": 11
+  },
+  {
+   "placeholder": "FOLDER_E8",
+   "meaning": "folder name: this experiment's folder",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "HOSTA_RUNS_PER_HOUR",
+   "meaning": "constant name containing the host machine's name in capitals",
+   "occurrences_in_all_files": 3
+  },
+  {
+   "placeholder": "HOSTA",
+   "meaning": "the host machine's name, as a word or inside folder names",
+   "occurrences_in_all_files": 10
+  },
+  {
+   "placeholder": "BUNDLE_A_var1",
+   "meaning": "bundle label with a variant suffix (an arm label of the earlier bundle screen)",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "BUNDLE_A_var2",
+   "meaning": "bundle label with a variant suffix (an arm label of the earlier bundle screen)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "BUNDLE_A_var3",
+   "meaning": "bundle label with a variant suffix (an arm label of the earlier bundle screen)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "BUNDLE_A_var4",
+   "meaning": "bundle label with a variant suffix (an arm label of the earlier bundle screen)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "BUNDLE_A_var5",
+   "meaning": "bundle label with a variant suffix (an arm label of the earlier bundle screen)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "BUNDLE_A",
+   "meaning": "the label of the authors' agent bundle",
+   "occurrences_in_all_files": 37
+  },
+  {
+   "placeholder": "bundle_a",
+   "meaning": "the bundle label in lower case (inside a function name)",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "[scratch]",
+   "meaning": "a scratch folder of the authors' tooling",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "jobs of other blocks of the same project",
+   "meaning": "neutral phrase for other blocks' jobs (was a pair of block labels)",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "Rows of other blocks of the same project",
+   "meaning": "neutral phrase for other blocks' rows (was a pair of block labels)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "a job of another block of the same project",
+   "meaning": "neutral phrase for a job of another block (was two block labels)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "other blocks of the same project and E8",
+   "meaning": "neutral phrase for other blocks (was two block labels)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "The project's server command",
+   "meaning": "neutral phrase (was a block label)",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "adapter_arm_B",
+   "meaning": "the label of the second adapter arm",
+   "occurrences_in_all_files": 15
+  },
+  {
+   "placeholder": "adapter_arm_A",
+   "meaning": "the label of the first adapter arm (not replaced where it starts the name of an internal document, which stays)",
+   "occurrences_in_all_files": 22
+  },
+  {
+   "placeholder": "adapter_name_A",
+   "meaning": "the name of the first adapter",
+   "occurrences_in_all_files": 5
+  },
+  {
+   "placeholder": "adapter_name_B",
+   "meaning": "the name of the second adapter",
+   "occurrences_in_all_files": 3
+  },
+  {
+   "placeholder": "parity_run_A",
+   "meaning": "folder name of an earlier parity run",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "parity_run_B",
+   "meaning": "folder name of an earlier parity run",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "parity_run_C",
+   "meaning": "folder name of an earlier parity run",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "[repo-root]",
+   "meaning": "the root folder of the authors' research tree (only where followed by a slash)",
+   "occurrences_in_all_files": 8
+  },
+  {
+   "placeholder": "[tools-env]",
+   "meaning": "the interpreter environment folder",
+   "occurrences_in_all_files": 4
+  },
+  {
+   "placeholder": "[tools-env-name]",
+   "meaning": "the name of the interpreter environment",
+   "occurrences_in_all_files": 4
+  },
+  {
+   "placeholder": "[py-lib-dir]",
+   "meaning": "the interpreter's library folder name",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "FOLDER_KIT_PAPER",
+   "meaning": "folder name: the kit's paper folder",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "FOLDER_KIT",
+   "meaning": "folder name: the kit folder",
+   "occurrences_in_all_files": 0
+  },
+  {
+   "placeholder": "FOLDER_PRIZE_NOTES",
+   "meaning": "folder name: notes of a prize-research folder",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "FOLDER_WRITEUP_LOG",
+   "meaning": "folder name: the authors' paper log",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "FOLDER_NOTEBOOKS",
+   "meaning": "folder name: public notebooks",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "[harness-src]",
+   "meaning": "the harness source folder",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "[task-data]",
+   "meaning": "the task dataset folder",
+   "occurrences_in_all_files": 3
+  },
+  {
+   "placeholder": "[model-dir]",
+   "meaning": "the model folder name",
+   "occurrences_in_all_files": 11
+  },
+  {
+   "placeholder": "[cpu-priority]",
+   "meaning": "a shell priority setting",
+   "occurrences_in_all_files": 4
+  },
+  {
+   "placeholder": "the isolation condition stated in the protocol holds as deployed",
+   "meaning": "neutral wording of a verifier's statement",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "\"max_lora_rank\": [rank]",
+   "meaning": "an adapter rank value in an example",
+   "occurrences_in_all_files": 2
+  },
+  {
+   "placeholder": "\"n_jobs\": [count]",
+   "meaning": "a job count in an example",
+   "occurrences_in_all_files": 1
+  },
+  {
+   "placeholder": "[internal-id-1]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 5
+  },
+  {
+   "placeholder": "[internal-id-2]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 5
+  },
+  {
+   "placeholder": "[internal-id-3]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 6
+  },
+  {
+   "placeholder": "[internal-id-4]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 4
+  },
+  {
+   "placeholder": "[internal-id-5]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 3
+  },
+  {
+   "placeholder": "[internal-id-6]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 8
+  },
+  {
+   "placeholder": "[internal-id-7]",
+   "meaning": "internal workflow id",
+   "occurrences_in_all_files": 1
+  }
+ ],
+ "cuts": [
+  {
+   "file": "FREEZE_RECORD.md",
+   "line": 25,
+   "end_line": 28,
+   "original_words": 57,
+   "category": "internal process history"
+  },
+  {
+   "file": "LEAD_DECISIONS.md",
+   "line": 3,
+   "end_line": 4,
+   "original_words": 19,
+   "category": "internal process history"
+  },
+  {
+   "file": "LEAD_DECISIONS.md",
+   "line": 51,
+   "end_line": 51,
+   "original_words": 7,
+   "category": "other experiment state"
+  },
+  {
+   "file": "LEAD_DECISIONS.md",
+   "line": 42,
+   "end_line": 43,
+   "original_words": 28,
+   "category": "other workloads"
+  },
+  {
+   "file": "LEAD_DECISIONS.md",
+   "line": 39,
+   "end_line": 39,
+   "original_words": 5,
+   "category": "owner bundle"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1095,
+   "end_line": 1095,
+   "original_words": 6,
+   "category": "owner workload"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1160,
+   "end_line": 1160,
+   "original_words": 5,
+   "category": "owner workload"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 3,
+   "end_line": 39,
+   "original_words": 603,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1228,
+   "end_line": 1247,
+   "original_words": 363,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1248,
+   "end_line": 1261,
+   "original_words": 207,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 184,
+   "end_line": 184,
+   "original_words": 7,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 801,
+   "end_line": 802,
+   "original_words": 16,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1287,
+   "end_line": 1287,
+   "original_words": 12,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1292,
+   "end_line": 1293,
+   "original_words": 26,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1321,
+   "end_line": 1322,
+   "original_words": 20,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1328,
+   "end_line": 1328,
+   "original_words": 10,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1329,
+   "end_line": 1329,
+   "original_words": 4,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1330,
+   "end_line": 1330,
+   "original_words": 4,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1330,
+   "end_line": 1331,
+   "original_words": 4,
+   "category": "internal process history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 522,
+   "end_line": 524,
+   "original_words": 30,
+   "category": "other experiment state"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 947,
+   "end_line": 950,
+   "original_words": 57,
+   "category": "other experiment state"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1336,
+   "end_line": 1339,
+   "original_words": 47,
+   "category": "other experiment state"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 564,
+   "end_line": 567,
+   "original_words": 63,
+   "category": "run history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 577,
+   "end_line": 585,
+   "original_words": 121,
+   "category": "run history"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 991,
+   "end_line": 993,
+   "original_words": 25,
+   "category": "bundle measurement"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1052,
+   "end_line": 1052,
+   "original_words": 6,
+   "category": "other workloads"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 266,
+   "end_line": 267,
+   "original_words": 29,
+   "category": "other workloads"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1197,
+   "end_line": 1197,
+   "original_words": 11,
+   "category": "owner approval"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1205,
+   "end_line": 1210,
+   "original_words": 99,
+   "category": "redaction plan"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 284,
+   "end_line": 285,
+   "original_words": 22,
+   "category": "adapter detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 731,
+   "end_line": 731,
+   "original_words": 6,
+   "category": "adapter detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 737,
+   "end_line": 738,
+   "original_words": 29,
+   "category": "adapter detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 824,
+   "end_line": 824,
+   "original_words": 4,
+   "category": "load detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 975,
+   "end_line": 975,
+   "original_words": 4,
+   "category": "load detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1315,
+   "end_line": 1315,
+   "original_words": 10,
+   "category": "load detail"
+  },
+  {
+   "file": "PROTOCOL.md",
+   "line": 1351,
+   "end_line": 1352,
+   "original_words": 12,
+   "category": "interpreter detail"
+  },
+  {
+   "file": "RUN_RECORD_SPEC_pinned.md",
+   "line": 232,
+   "end_line": 241,
+   "original_words": 164,
+   "category": "adapter detail"
+  },
+  {
+   "file": "RUN_RECORD_SPEC_pinned.md",
+   "line": 172,
+   "end_line": 172,
+   "original_words": 5,
+   "category": "adapter detail"
+  },
+  {
+   "file": "RUN_RECORD_SPEC_pinned.md",
+   "line": 324,
+   "end_line": 324,
+   "original_words": 10,
+   "category": "adapter detail"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 1228,
+   "end_line": 1228,
+   "original_words": 11,
+   "category": "internal process history"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 2034,
+   "end_line": 2034,
+   "original_words": 11,
+   "category": "internal process history"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 3171,
+   "end_line": 3171,
+   "original_words": 11,
+   "category": "internal process history"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 2066,
+   "end_line": 2066,
+   "original_words": 13,
+   "category": "adapter detail"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 3155,
+   "end_line": 3156,
+   "original_words": 32,
+   "category": "adapter detail"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 3900,
+   "end_line": 3904,
+   "original_words": 81,
+   "category": "adapter detail"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 3194,
+   "end_line": 3194,
+   "original_words": 18,
+   "category": "adapter detail"
+  },
+  {
+   "file": "analyze_e7_pinned.py",
+   "line": 3195,
+   "end_line": 3195,
+   "original_words": 3,
+   "category": "adapter detail"
+  }
+ ],
+ "files": [
+  {
+   "original_name": "FREEZE_RECORD.md",
+   "original_sha256": "981445584ecaf16ac2a98439494c37cd8216afa547d912db5b22d9f93e4fcd54",
+   "original_bytes": 2514,
+   "redacted_name": "FREEZE_RECORD.redacted.md",
+   "redacted_sha256": "fa0020f3b1b8279aaf5932340426f578e7c8e4ea207aef0f8f45cdf7b9a9d530",
+   "redacted_bytes": 2196,
+   "substituted_occurrences": 1,
+   "substitutions_by_placeholder": {
+    "[scratch]": 1
+   },
+   "cuts": [
+    {
+     "category": "internal process history",
+     "end_line": 28,
+     "line": 25,
+     "marker": "[redacted: 57 words, internal process history]",
+     "words": 57
+    }
+   ]
+  },
+  {
+   "original_name": "LEAD_DECISIONS.md",
+   "original_sha256": "4a652573b046d78933b6e51bf1b8f0925242121538ef455672d92f9fddcd040b",
+   "original_bytes": 9962,
+   "redacted_name": "LEAD_DECISIONS.redacted.md",
+   "redacted_sha256": "0dd9d6e38314170d5be2e46567e2a6c2abe4406cff58e717001d20f5f261b553",
+   "redacted_bytes": 9747,
+   "substituted_occurrences": 6,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_EVAL": 1,
+    "FOLDER_E8": 1,
+    "HOSTA": 1,
+    "BUNDLE_A": 1,
+    "other blocks of the same project and E8": 1,
+    "the isolation condition stated in the protocol holds as deployed": 1
+   },
+   "cuts": [
+    {
+     "category": "internal process history",
+     "end_line": 4,
+     "line": 3,
+     "marker": "[redacted: 19 words, internal process history]",
+     "words": 19
+    },
+    {
+     "category": "other experiment state",
+     "end_line": 51,
+     "line": 51,
+     "marker": "[redacted: 7 words, other experiment state]",
+     "words": 7
+    },
+    {
+     "category": "other workloads",
+     "end_line": 43,
+     "line": 42,
+     "marker": "[redacted: 28 words, other workloads]",
+     "words": 28
+    },
+    {
+     "category": "owner bundle",
+     "end_line": 39,
+     "line": 39,
+     "marker": "[redacted: 5 words, owner bundle]",
+     "words": 5
+    }
+   ]
+  },
+  {
+   "original_name": "PROTOCOL.md",
+   "original_sha256": "070c9655d96372d054f430727259de7b25af2ca93c3ec4c9295dfdc37aeb8cf4",
+   "original_bytes": 121308,
+   "redacted_name": "PROTOCOL.redacted.md",
+   "redacted_sha256": "95dcffcbbd3c67d10b41dcdc0205b8ed68e46ef1dc9dd57be09055895855d8cd",
+   "redacted_bytes": 110590,
+   "substituted_occurrences": 92,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_SRC": 6,
+    "FOLDER_RUNNER_EVAL": 9,
+    "FOLDER_OUT_DOCKER": 1,
+    "FOLDER_OUT_D42": 1,
+    "FOLDER_OUT_D4": 1,
+    "FOLDER_E6": 5,
+    "FOLDER_E8": 1,
+    "BUNDLE_A": 12,
+    "jobs of other blocks of the same project": 2,
+    "Rows of other blocks of the same project": 1,
+    "a job of another block of the same project": 1,
+    "The project's server command": 1,
+    "parity_run_A": 1,
+    "parity_run_B": 1,
+    "parity_run_C": 1,
+    "[repo-root]": 1,
+    "[tools-env]": 1,
+    "[tools-env-name]": 4,
+    "FOLDER_KIT_PAPER": 1,
+    "FOLDER_PRIZE_NOTES": 2,
+    "FOLDER_WRITEUP_LOG": 1,
+    "FOLDER_NOTEBOOKS": 1,
+    "[harness-src]": 2,
+    "[task-data]": 1,
+    "[model-dir]": 6,
+    "[cpu-priority]": 2,
+    "[internal-id-1]": 5,
+    "[internal-id-2]": 4,
+    "[internal-id-3]": 3,
+    "[internal-id-4]": 4,
+    "[internal-id-5]": 2,
+    "[internal-id-6]": 7,
+    "[internal-id-7]": 1
+   },
+   "cuts": [
+    {
+     "category": "owner workload",
+     "end_line": 1095,
+     "line": 1095,
+     "marker": "[redacted: 6 words, owner workload]",
+     "words": 6
+    },
+    {
+     "category": "owner workload",
+     "end_line": 1160,
+     "line": 1160,
+     "marker": "[redacted: 5 words, owner workload]",
+     "words": 5
+    },
+    {
+     "category": "internal process history",
+     "end_line": 39,
+     "line": 3,
+     "marker": "[redacted: 603 words, internal process history]",
+     "words": 603
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1247,
+     "line": 1228,
+     "marker": "[redacted: 363 words, internal process history]",
+     "words": 363
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1261,
+     "line": 1248,
+     "marker": "[redacted: 207 words, internal process history]",
+     "words": 207
+    },
+    {
+     "category": "internal process history",
+     "end_line": 184,
+     "line": 184,
+     "marker": "[redacted: 7 words, internal process history]",
+     "words": 7
+    },
+    {
+     "category": "internal process history",
+     "end_line": 802,
+     "line": 801,
+     "marker": "[redacted: 16 words, internal process history]",
+     "words": 16
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1287,
+     "line": 1287,
+     "marker": "[redacted: 12 words, internal process history]",
+     "words": 12
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1293,
+     "line": 1292,
+     "marker": "[redacted: 26 words, internal process history]",
+     "words": 26
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1322,
+     "line": 1321,
+     "marker": "[redacted: 20 words, internal process history]",
+     "words": 20
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1328,
+     "line": 1328,
+     "marker": "[redacted: 10 words, internal process history]",
+     "words": 10
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1329,
+     "line": 1329,
+     "marker": "[redacted: 4 words, internal process history]",
+     "words": 4
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1330,
+     "line": 1330,
+     "marker": "[redacted: 4 words, internal process history]",
+     "words": 4
+    },
+    {
+     "category": "internal process history",
+     "end_line": 1331,
+     "line": 1330,
+     "marker": "[redacted: 4 words, internal process history]",
+     "words": 4
+    },
+    {
+     "category": "other experiment state",
+     "end_line": 524,
+     "line": 522,
+     "marker": "[redacted: 30 words, other experiment state]",
+     "words": 30
+    },
+    {
+     "category": "other experiment state",
+     "end_line": 950,
+     "line": 947,
+     "marker": "[redacted: 57 words, other experiment state]",
+     "words": 57
+    },
+    {
+     "category": "other experiment state",
+     "end_line": 1339,
+     "line": 1336,
+     "marker": "[redacted: 47 words, other experiment state]",
+     "words": 47
+    },
+    {
+     "category": "run history",
+     "end_line": 567,
+     "line": 564,
+     "marker": "[redacted: 63 words, run history]",
+     "words": 63
+    },
+    {
+     "category": "run history",
+     "end_line": 585,
+     "line": 577,
+     "marker": "[redacted: 121 words, run history]",
+     "words": 121
+    },
+    {
+     "category": "bundle measurement",
+     "end_line": 993,
+     "line": 991,
+     "marker": "[redacted: 25 words, bundle measurement]",
+     "words": 25
+    },
+    {
+     "category": "other workloads",
+     "end_line": 1052,
+     "line": 1052,
+     "marker": "[redacted: 6 words, other workloads]",
+     "words": 6
+    },
+    {
+     "category": "other workloads",
+     "end_line": 267,
+     "line": 266,
+     "marker": "[redacted: 29 words, other workloads]",
+     "words": 29
+    },
+    {
+     "category": "owner approval",
+     "end_line": 1197,
+     "line": 1197,
+     "marker": "[redacted: 11 words, owner approval]",
+     "words": 11
+    },
+    {
+     "category": "redaction plan",
+     "end_line": 1210,
+     "line": 1205,
+     "marker": "[redacted: 99 words, redaction plan]",
+     "words": 99
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 285,
+     "line": 284,
+     "marker": "[redacted: 22 words, adapter detail]",
+     "words": 22
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 731,
+     "line": 731,
+     "marker": "[redacted: 6 words, adapter detail]",
+     "words": 6
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 738,
+     "line": 737,
+     "marker": "[redacted: 29 words, adapter detail]",
+     "words": 29
+    },
+    {
+     "category": "load detail",
+     "end_line": 824,
+     "line": 824,
+     "marker": "[redacted: 4 words, load detail]",
+     "words": 4
+    },
+    {
+     "category": "load detail",
+     "end_line": 975,
+     "line": 975,
+     "marker": "[redacted: 4 words, load detail]",
+     "words": 4
+    },
+    {
+     "category": "load detail",
+     "end_line": 1315,
+     "line": 1315,
+     "marker": "[redacted: 10 words, load detail]",
+     "words": 10
+    },
+    {
+     "category": "interpreter detail",
+     "end_line": 1352,
+     "line": 1351,
+     "marker": "[redacted: 12 words, interpreter detail]",
+     "words": 12
+    }
+   ]
+  },
+  {
+   "original_name": "RUN_RECORD_SPEC_pinned.md",
+   "original_sha256": "258c9246c8461aa57b2045ee6a95443eb4e9035b014f76391e8d405f5aa897f8",
+   "original_bytes": 30995,
+   "redacted_name": "RUN_RECORD_SPEC_pinned.redacted.md",
+   "redacted_sha256": "6a738c4d02ed604f700ef8850d81e3cd2eacea90be9c55c211e0ac6edaf671c5",
+   "redacted_bytes": 30268,
+   "substituted_occurrences": 40,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_SRC": 3,
+    "HOSTA": 3,
+    "BUNDLE_A_var1": 1,
+    "BUNDLE_A": 5,
+    "adapter_arm_B": 7,
+    "adapter_arm_A": 12,
+    "adapter_name_A": 4,
+    "adapter_name_B": 2,
+    "\"max_lora_rank\": [rank]": 2,
+    "\"n_jobs\": [count]": 1
+   },
+   "cuts": [
+    {
+     "category": "adapter detail",
+     "end_line": 241,
+     "line": 232,
+     "marker": "[redacted: 164 words, adapter detail]",
+     "words": 164
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 172,
+     "line": 172,
+     "marker": "[redacted: 5 words, adapter detail]",
+     "words": 5
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 324,
+     "line": 324,
+     "marker": "[redacted: 10 words, adapter detail]",
+     "words": 10
+    }
+   ]
+  },
+  {
+   "original_name": "analyze_e7_pinned.py",
+   "original_sha256": "e86ccd811424e98462f9696d1e977d780108dc68b9dea6cea47d88053613b50c",
+   "original_bytes": 293278,
+   "redacted_name": "analyze_e7_pinned.redacted.py",
+   "redacted_sha256": "17825c1b712a59624d940e555623d999d26547d4cc25a8b9322c8ff997fd50b0",
+   "redacted_bytes": 292831,
+   "substituted_occurrences": 55,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_SRC": 3,
+    "FOLDER_RUNNER_EVAL": 1,
+    "HOSTA_RUNS_PER_HOUR": 3,
+    "HOSTA": 6,
+    "BUNDLE_A_var1": 1,
+    "BUNDLE_A_var2": 1,
+    "BUNDLE_A_var3": 1,
+    "BUNDLE_A_var4": 1,
+    "BUNDLE_A_var5": 1,
+    "BUNDLE_A": 12,
+    "adapter_arm_B": 8,
+    "adapter_arm_A": 10,
+    "adapter_name_A": 1,
+    "adapter_name_B": 1,
+    "parity_run_A": 1,
+    "[repo-root]": 2,
+    "[tools-env]": 1,
+    "[py-lib-dir]": 1
+   },
+   "cuts": [
+    {
+     "category": "internal process history",
+     "end_line": 1228,
+     "line": 1228,
+     "marker": "[redacted: 11 words, internal process history]",
+     "words": 11
+    },
+    {
+     "category": "internal process history",
+     "end_line": 2034,
+     "line": 2034,
+     "marker": "[redacted: 11 words, internal process history]",
+     "words": 11
+    },
+    {
+     "category": "internal process history",
+     "end_line": 3171,
+     "line": 3171,
+     "marker": "[redacted: 11 words, internal process history]",
+     "words": 11
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 2066,
+     "line": 2066,
+     "marker": "[redacted: 13 words, adapter detail]",
+     "words": 13
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 3156,
+     "line": 3155,
+     "marker": "[redacted: 32 words, adapter detail]",
+     "words": 32
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 3904,
+     "line": 3900,
+     "marker": "[redacted: 81 words, adapter detail]",
+     "words": 81
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 3194,
+     "line": 3194,
+     "marker": "[redacted: 18 words, adapter detail]",
+     "words": 18
+    },
+    {
+     "category": "adapter detail",
+     "end_line": 3195,
+     "line": 3195,
+     "marker": "[redacted: 3 words, adapter detail]",
+     "words": 3
+    }
+   ]
+  },
+  {
+   "original_name": "analyze_e8.py",
+   "original_sha256": "16a80a2a92ff9916fd061b0e10e73c4df80c7ccb62c0241d01ca74de9931f2f7",
+   "original_bytes": 128727,
+   "redacted_name": "analyze_e8.redacted.py",
+   "redacted_sha256": "16a80a2a92ff9916fd061b0e10e73c4df80c7ccb62c0241d01ca74de9931f2f7",
+   "redacted_bytes": 128727,
+   "substituted_occurrences": 0,
+   "substitutions_by_placeholder": {},
+   "cuts": []
+  },
+  {
+   "original_name": "e8_arms.json",
+   "original_sha256": "f0ca2eb83d4727942887e21ab68abfe03b885d2e6324da8918e6b33faf461afe",
+   "original_bytes": 2856,
+   "redacted_name": "e8_arms.redacted.json",
+   "redacted_sha256": "dea12b0c3559eef90defd1a5743b9f84dbcd45ee3512d6abef757f3ec286552e",
+   "redacted_bytes": 2858,
+   "substituted_occurrences": 1,
+   "substitutions_by_placeholder": {
+    "BUNDLE_A": 1
+   },
+   "cuts": []
+  },
+  {
+   "original_name": "make_jobs_e8.py",
+   "original_sha256": "b101bc6b012c673f4a5078cb140a30a53720ffeb9d55d83dcd6bd4f1a7bcc83c",
+   "original_bytes": 33148,
+   "redacted_name": "make_jobs_e8.redacted.py",
+   "redacted_sha256": "3c4fd1402ed14fbab4e4a42f9f33d2d84ec90d37e2e3e7923937c519aec75982",
+   "redacted_bytes": 33152,
+   "substituted_occurrences": 9,
+   "substitutions_by_placeholder": {
+    "FOLDER_E7": 1,
+    "FOLDER_E6": 2,
+    "BUNDLE_A": 2,
+    "[repo-root]": 2,
+    "[task-data]": 2
+   },
+   "cuts": []
+  },
+  {
+   "original_name": "manip_check_e8.py",
+   "original_sha256": "b075ed73acea92e95ef2ac91d9bf1d00d115fd957dae7e0baaa5e065651d0c16",
+   "original_bytes": 46059,
+   "redacted_name": "manip_check_e8.redacted.py",
+   "redacted_sha256": "c392e0d71580120da805b8d416188b84898cb5a04969a2f2ac6287b785c70baf",
+   "redacted_bytes": 46063,
+   "substituted_occurrences": 2,
+   "substitutions_by_placeholder": {
+    "BUNDLE_A": 2
+   },
+   "cuts": []
+  },
+  {
+   "original_name": "test_analyze_e8.py",
+   "original_sha256": "b2c0aa1d628890a7b8de41b3c1d030e9a91887b200239ab0d680fac8f5084d05",
+   "original_bytes": 104883,
+   "redacted_name": "test_analyze_e8.redacted.py",
+   "redacted_sha256": "2e0b802aa15dbe213f17f0b610d802a24d5ee37f52028d57bb9e627721329be8",
+   "redacted_bytes": 104970,
+   "substituted_occurrences": 20,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_SRC": 2,
+    "FOLDER_RUNNER_EVAL": 3,
+    "FOLDER_OUT_D42": 1,
+    "FOLDER_OUT_D4": 1,
+    "FOLDER_E6": 2,
+    "BUNDLE_A": 2,
+    "bundle_a": 2,
+    "[repo-root]": 1,
+    "[tools-env]": 1,
+    "[model-dir]": 2,
+    "[cpu-priority]": 1,
+    "[internal-id-2]": 1,
+    "[internal-id-6]": 1
+   },
+   "cuts": []
+  },
+  {
+   "original_name": "test_manip_check_e8.py",
+   "original_sha256": "8a5539964bc0040d02cad2f25f88f32e56f91208539504cf099c1dcda1d1bf97",
+   "original_bytes": 47669,
+   "redacted_name": "test_manip_check_e8.redacted.py",
+   "redacted_sha256": "b9baa5dd1e6133edbea94faf7c555188d77adb3a1f71bc124dc922c21dd06b98",
+   "redacted_bytes": 47753,
+   "substituted_occurrences": 19,
+   "substitutions_by_placeholder": {
+    "FOLDER_RUNNER_SRC": 2,
+    "FOLDER_RUNNER_EVAL": 1,
+    "FOLDER_OUT_D4": 2,
+    "FOLDER_E6": 2,
+    "[scratch]": 1,
+    "[repo-root]": 2,
+    "[tools-env]": 1,
+    "[model-dir]": 3,
+    "[cpu-priority]": 1,
+    "[internal-id-3]": 3,
+    "[internal-id-5]": 1
+   },
+   "cuts": []
+  }
+ ],
+ "hash_only": [
+  {
+   "name": "jobs_e8.json",
+   "sha256": "4fe9fb3a70c6415e2e49d9aa5e87d31ba8c94db9e8fa28f85d93c0d62e973bfc",
+   "bytes": 2854928,
+   "why_hash_only": "2.8 MB (over the kit's 512 KiB file cap) and every one of its 4,620 jobs carries the agent bundle's internal label in the field 'bundle'; the label is replaced by BUNDLE_A in a derived list that the redacted make_jobs_e8.py regenerates byte for byte (see regenerated_by_redacted_make_jobs_sha256)",
+   "jobs": 4620,
+   "regenerated_by_redacted_make_jobs_sha256": "51eb46d4bf48f4f3d8b74ed4f564fde48eaf6226b0e5679fa4039088ac6f01ce",
+   "regeneration": "make_jobs_e8.py --panel panel_E8.json --out-dir DIR (redacted copy renamed back to make_jobs_e8.py, frozen panel_E8.json); it is the frozen list with the label replaced and the arm-file hash replaced"
+  },
+  {
+   "name": "DEVIATIONS.md",
+   "sha256": "453e76269f2e2ea12aa369d23fc8208bee7602e48e2f6e029f3510913d5fe31c",
+   "bytes": 15696,
+   "why_hash_only": "a live, append-only log of deviations from the protocol (not a frozen file); it is still open and names internal tooling, so only a snapshot hash is given",
+   "note": "snapshot taken 2026-11-10 15:53 UTC; the log is still open and gets appended to, so this value will be superseded"
+  },
+  {
+   "name": "jobs_e8.sha256",
+   "sha256": "7b319ba457ad4e03db4732efa7d474a68f113c2b55557f2d6e9fa60cdb19bb28",
+   "bytes": 328,
+   "why_hash_only": "four lines naming the sha256 of e8_arms.json, jobs_e8.json, jobs_e8smoke.json and jobs_e8capture.json; its content is reproduced in README.md (the file type is not one the kit's release check accepts)",
+   "lists": {
+    "e8_arms.json": "f0ca2eb83d4727942887e21ab68abfe03b885d2e6324da8918e6b33faf461afe",
+    "jobs_e8.json": "4fe9fb3a70c6415e2e49d9aa5e87d31ba8c94db9e8fa28f85d93c0d62e973bfc",
+    "jobs_e8smoke.json": "394cacc92a9e0781468804bf8e3c650cca82dbb80183d52fb09f75fde3db490c",
+    "jobs_e8capture.json": "a7abd121922cd5eaebd16b9dd946964e9124c38ded101df2ae8019cbc4ff5d77"
+   }
+  }
+ ],
+ "derived_not_shipped": {
+  "regenerated_by_redacted_make_jobs": {
+   "jobs_e8.json": "51eb46d4bf48f4f3d8b74ed4f564fde48eaf6226b0e5679fa4039088ac6f01ce",
+   "jobs_e8smoke.json": "79168bd90e53b7f70e3a29527ccc521ba54df32b9b9eba7d3b15ab180302a252",
+   "jobs_e8capture.json": "2fe8b10b67a1ebf825cb8320b1127f07117fd6f2070c03a7cd0d151532be56f1",
+   "e8_arms.json": "dea12b0c3559eef90defd1a5743b9f84dbcd45ee3512d6abef757f3ec286552e"
+  },
+  "note": "sha256 of the lists that the redacted make_jobs_e8.py writes from the frozen panel; e8_arms.json here is identical to the shipped e8_arms.redacted.json"
+ },
+ "rebinding_recipe_for_running_the_redacted_set": [
+  {
+   "file": "analyze_e8.py",
+   "line": 115,
+   "constant": "PINNED_ANALYZE_E7_SHA256",
+   "frozen_value": "e86ccd811424e98462f9696d1e977d780108dc68b9dea6cea47d88053613b50c",
+   "value_for_the_redacted_set": "17825c1b712a59624d940e555623d999d26547d4cc25a8b9322c8ff997fd50b0"
+  },
+  {
+   "file": "analyze_e8.py",
+   "line": 120,
+   "constant": "PINNED_RUN_RECORD_SPEC_SHA256",
+   "frozen_value": "258c9246c8461aa57b2045ee6a95443eb4e9035b014f76391e8d405f5aa897f8",
+   "value_for_the_redacted_set": "6a738c4d02ed604f700ef8850d81e3cd2eacea90be9c55c211e0ac6edaf671c5"
+  },
+  {
+   "file": "analyze_e8.py",
+   "line": 124,
+   "constant": "FROZEN_CHECKER_SHA256",
+   "frozen_value": "b075ed73acea92e95ef2ac91d9bf1d00d115fd957dae7e0baaa5e065651d0c16",
+   "value_for_the_redacted_set": "c392e0d71580120da805b8d416188b84898cb5a04969a2f2ac6287b785c70baf"
+  },
+  {
+   "file": "test_analyze_e8.py",
+   "line": 189,
+   "constant": "literal in test_pinned_analyze_e7 (same as line 115)",
+   "frozen_value": "e86ccd811424e98462f9696d1e977d780108dc68b9dea6cea47d88053613b50c",
+   "value_for_the_redacted_set": "17825c1b712a59624d940e555623d999d26547d4cc25a8b9322c8ff997fd50b0"
+  },
+  {
+   "file": "test_analyze_e8.py",
+   "line": 1789,
+   "constant": "literal in test_run_record_spec_is_vendored (same as line 120)",
+   "frozen_value": "258c9246c8461aa57b2045ee6a95443eb4e9035b014f76391e8d405f5aa897f8",
+   "value_for_the_redacted_set": "6a738c4d02ed604f700ef8850d81e3cd2eacea90be9c55c211e0ac6edaf671c5"
+  }
+ ],
+ "rebound_analyze_e8_sha256": "6947b30577ddec51136251927da6c2818034c2c84bdd9843b94759205f18b0e4",
+ "rebinding_sixth_edit": "only in the copy of the protocol that test_protocol_states_the_frozen_hashes_consistently reads: the printed checker hash (3 places) becomes the redacted checker's hash and the printed analysis hash (2 places) becomes rebound_analyze_e8_sha256"
+}

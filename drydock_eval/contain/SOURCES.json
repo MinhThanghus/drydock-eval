@@ -1,0 +1,226 @@
+{
+ "_license": "Copyright 2026 The drydock-eval Authors. SPDX-License-Identifier: Apache-2.0",
+ "_about": "File manifest of drydock_eval/contain/reference. `sha256` is the released file; `verified_source_sha256` is the file of the authors' deployment that the canaries and controls reported in the write-up were run with. A released file differs from it by the licence header, by host-specific constants (paths, account and host names, a port, labels of private agent bundles), and in two canary files by one rewritten check (GUIDE section 7); the authors keep a per-file diff. Because the header changes every hash, the released tree has its own runner, library and harness hashes: it has not been run in a container by the authors and no gate file exists for it.",
+ "_verbatim": {
+  "lib/seccomp_g4s_d41.json": "A Docker seccomp profile, shipped byte-identical because the library pins its sha256 and Docker reads the file: it carries no licence field. It is the default profile of the Moby project (github.com/moby/profiles, seccomp/default.json, v0.2.3, Apache-2.0) with the Linux AIO system calls removed and an explicit rule denying io_uring, as produced by tools/make_seccomp_d41.py; distributed here under Apache-2.0. The attribution and the statement of the change are in the NOTICE file at the top of the package."
+ },
+ "format": "drydock-eval contain sources 1",
+ "files": [
+  {
+   "path": "docker/Dockerfile",
+   "sha256": "992f94e33181e8312ac9988c8e2acfd9897a07aadb90c81d764e759de21ad680",
+   "bytes": 4412,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "03629918c984d1aaf36effb85404993e2bfda08d7e4f7ca904e05383689403a7"
+  },
+  {
+   "path": "docker/build.sh",
+   "sha256": "6d0469034788014c22ab70ec8c810ad2f16ac68f837c2d51c38d3be5d3309d0e",
+   "bytes": 3307,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "b1a6d7021e36166993efce82b6d05af6b63bcaf4776ec7d2c9f918063932c005"
+  },
+  {
+   "path": "docker/e6/sandbox_berth.py",
+   "sha256": "412da37eb1dffa1e7372a97463182029048478c424af7ce1a394fd9cf03caf3a",
+   "bytes": 4249,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "d18a8d500d0f620d4380c9ab5f18a2122d7e6835d55c078530d5f3c801db7ec9"
+  },
+  {
+   "path": "docker/e6/worker_berth.py",
+   "sha256": "ff75711cf6fd6f856422495e08341b175031ce67fcbf6e6b0f3073f8b746b428",
+   "bytes": 12901,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "8f06cc04364a59a987c920251c758bca4b0b6b6c93e0f4db5f35cabc74bd0564"
+  },
+  {
+   "path": "docker/e8/e8_hook.py",
+   "sha256": "5737d1ee29cc9e03dafd8d4113ef0dd1da6b8a634a1a90a60a739472ab7ed62c",
+   "bytes": 18468,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "daa9ac00050e884de71c31b0d2eaee2890aa012e9fa367ddd9ffd938418e3428"
+  },
+  {
+   "path": "docker/e8/worker_berth_e8.py",
+   "sha256": "9ba0a7d6da2a11a5229591a347fa39613f072b7644066d4cd6a2861bf97a7762",
+   "bytes": 15077,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "6d2e017a1c4a4ac6de0a1ad22ff3810349edf714104f6b4e921a3b7b87d1bdc9"
+  },
+  {
+   "path": "docker/init.py",
+   "sha256": "fe2629b264d6972a41ac71ceb53897d84d39bef0083a73132f64ed18fb12ec15",
+   "bytes": 14783,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "5dd43dbf221f2a114dd0ca69ff7b3c5310b0d9daa89faf962d49984f9068da36"
+  },
+  {
+   "path": "docker/prep.py",
+   "sha256": "b2a0db0cd24f24446f28e3630c61165326a0ee4f2349899f5575270481e54fd0",
+   "bytes": 2709,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "264d3e544b7826706c6ba129dcdd2f7525878df9206e863a09063ccee040ef7c"
+  },
+  {
+   "path": "launch.sh",
+   "sha256": "bc53d041ae47bc32f4a48c0e449755b715ff3e3d799fb2a71c1d3602b5abc4ae",
+   "bytes": 2827,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "c22272ec372d4a301f52eed1043ac8dad2f44c9093e6f48990e5c6250a27659c"
+  },
+  {
+   "path": "lib/g4s_d4.py",
+   "sha256": "186f2749cf9c87b7d274aaaaddf5c56fc6668bf7a859a00ab17ad676b63235c8",
+   "bytes": 84517,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "bb5d03777f6c6dd53b08212cd40d4c1229cb84607b91eddb5a09a6d88fba4d60"
+  },
+  {
+   "path": "lib/seccomp_g4s_d41.json",
+   "sha256": "739cc9049e6f9ce05793bc5210b33b81cf99dd0abeaf71b5337817a9db2b8619",
+   "bytes": 13725,
+   "executable": false,
+   "change": "verbatim",
+   "verified_source_sha256": "739cc9049e6f9ce05793bc5210b33b81cf99dd0abeaf71b5337817a9db2b8619"
+  },
+  {
+   "path": "run_berth.py",
+   "sha256": "b760361237853f9f0380bbe4b7c286090685369c62d7f016dd96adbc4460031a",
+   "bytes": 90039,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "9c05d6db60ab3fba6a93bc08a7e5951fcf1c0babf67584f6cec101f950cd7975"
+  },
+  {
+   "path": "status.sh",
+   "sha256": "16136f8b3b3eabd919057952c0147fb252a8c8cf421297c1acebef6890f675c9",
+   "bytes": 1537,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "62e592bd120b5bea894fdb78669c3c20879c6e353c6370f836a72b6bfe613f85"
+  },
+  {
+   "path": "stop.sh",
+   "sha256": "8e68d0edfee37eb87c52be6922d68514aee59829ed793b5eb14f8c1b7894ebc4",
+   "bytes": 2025,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "52b471fbf1d7e1e6648835f4fbe60262d2f8401b43e37638823420da32fd2f64"
+  },
+  {
+   "path": "tools/analyze_e7.py",
+   "sha256": "86a1433d87b50f4da98eecaf7f66c30c67f4b48e86df2001dd78dcf0c53b9bd7",
+   "bytes": 294087,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "e86ccd811424e98462f9696d1e977d780108dc68b9dea6cea47d88053613b50c"
+  },
+  {
+   "path": "tools/canary_d4.py",
+   "sha256": "dd368c0c6cd3f53ce9fa13773654100798bf7ecdd05727f08ead76a1e769940b",
+   "bytes": 63833,
+   "executable": true,
+   "change": "licence header, host-specific constants, and a rewritten home_visibility / writes_outside_tmpfs check (logic change; see GUIDE section 7)",
+   "verified_source_sha256": "c6455d7fcd24ffa7b8e17773aa40ed0b9401d3cccf580cdbc07542b2d24d1536"
+  },
+  {
+   "path": "tools/d42/part_d42.py",
+   "sha256": "e1d3ba4fb75c9b790629c7d3f123c9ce0a6dd722e760f555de5274b8bc9166ff",
+   "bytes": 47299,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "c1eaebe5ce9674c3acc328bd524aa05e1b5ac9360979213881fc6ac3b069e082"
+  },
+  {
+   "path": "tools/d42/stub_model.py",
+   "sha256": "ec12e28f7d7e3272450520f4b2057d90c6fe47a4e9472922713a5de000f432d8",
+   "bytes": 11456,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "e87588fb489108ebe0d62a1165d165732a2af6d165883315784a9855a8d2a425"
+  },
+  {
+   "path": "tools/d43/part_d43.py",
+   "sha256": "97c75c3762e6d775314b90e277f3f169f7a31fe92602128e9e5537e742a2cf7e",
+   "bytes": 18427,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "f9550cbe086b0c60460d58633d288565da59dc547235094880f4ad02a2fc85d7"
+  },
+  {
+   "path": "tools/d43/scan_check.py",
+   "sha256": "71ecf2cc7bf452f12212fb24998216b74794ac5ce6f138f2acfedcf2c1ad05fe",
+   "bytes": 13932,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "f439f1758db8161d76ce65578fe36049f8a17fd5acd3ebadcc19602150bcd80e"
+  },
+  {
+   "path": "tools/d4canary/canary_inner.py",
+   "sha256": "d2ec9456b21a5976ff7b6b13b638a0558f9526472a90efa722717a93e7f29eeb",
+   "bytes": 85224,
+   "executable": false,
+   "change": "licence header, host-specific constants, and a rewritten home_visibility / writes_outside_tmpfs check (logic change; see GUIDE section 7)",
+   "verified_source_sha256": "54464eabf126af8038508ac7f226fddee389352bb38697589b38fe051e08be3f"
+  },
+  {
+   "path": "tools/d4canary/e8_launch.py",
+   "sha256": "a7b5c486ec645ea8b2ca25f7dec3e6f87447b50880d7fd114a6c163c7e3a0f9f",
+   "bytes": 10155,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "afeedc851070457d78aca4327d3d5989fb64277d56104b25cdb618d6dc24f43c"
+  },
+  {
+   "path": "tools/d4canary/syscall_probe.py",
+   "sha256": "34078d593e3809ba9192770226b321f47c228655c0fb3f563cbcddc5ab387e1b",
+   "bytes": 5775,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "f7eae6801913a6aa8d72a6f92ff958baffb74e17b0672fb5e39c1a65edff06c3"
+  },
+  {
+   "path": "tools/make_seccomp_d41.py",
+   "sha256": "fa3b669be01d931dde821bfc3e7cf437b1e5716cb0347f5d71226b1828331327",
+   "bytes": 4169,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "3d5565d2e97b11346996b3fdfda79d75c70544f09ebbbed8596b89cfac0c4f4c"
+  },
+  {
+   "path": "tools/reap.py",
+   "sha256": "83de5ff8154b779975bd56f5f348955b3cd8ed7e3714bf357970ea6898f67130",
+   "bytes": 1511,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "1750bfb43fb329a8b68a94d3660927ed8ed5b8336b273a65390a8a60bacf9734"
+  },
+  {
+   "path": "tools/scoped.sh",
+   "sha256": "fa512bb7eecb04100ae9391f6137038db6c0716ccdda119fffab5f009c35e8ad",
+   "bytes": 1373,
+   "executable": true,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "15dc9465efdb392bcf8910226cb8f3ad7a8c337e1d479e0685a4b43358932ac6"
+  },
+  {
+   "path": "tools/write_canary_passed_d43.py",
+   "sha256": "02560873bd9f8ea6e9e2cd439670bb9a86f52b7859a2510ec7d6cc39405cf705",
+   "bytes": 13970,
+   "executable": false,
+   "change": "licence header and host-specific constants",
+   "verified_source_sha256": "878d2807f91813739b26b21fb4174f6a3f8e6403b60d60eba7118460de5b8153"
+  }
+ ]
+}

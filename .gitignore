@@ -1,0 +1,11 @@
+# Copyright 2026 The drydock-eval Authors
+# SPDX-License-Identifier: Apache-2.0
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+# the authors' build records of a release candidate: not part of the release
+PROVENANCE.json
+BUILD_REPORT.md
