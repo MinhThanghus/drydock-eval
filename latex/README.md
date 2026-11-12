@@ -1,8 +1,7 @@
 # Contain, Conform, Compare: paper, supplement and data
 
 This directory holds the paper that describes `drydock-eval`, its supplementary material, and the outcome data of the
-paper's case study. The kit itself is on the branch `develop` of this repository (tag `v0.4.0`). The extended version
-of the paper, with the record of all experiments, is in the directory `latex_long/` of this branch.
+paper's case study. The kit itself is on the branch `develop` of this repository (tag `v0.4.0`).
 
 Nguyen Minh Thang. *Contain, Conform, Compare: A Red-Teamed Kit for Evaluating Small Coding Agents on One GPU.*
 November 2026.

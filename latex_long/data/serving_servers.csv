@@ -1,8 +1,0 @@
-experiment,model,adapter,startup_s,kv_cache_tokens
-serve-1,31B,none,337.4,46352
-serve-1,E4B,none,275.3,298464
-serve-1,12B,none,200.2,160416
-serve-2,31B,none,358.5,46352
-serve-2,31B,r16-all-linear,266.3,37328
-serve-2,31B,r16-attention,235.3,37328
-serve-2,31B,r8-two-modules,262.3,37568
