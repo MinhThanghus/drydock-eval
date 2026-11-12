@@ -12,7 +12,7 @@ The competition scores an agent bundle on hidden GitHub-issue tasks, with Gemma 
 
 **Safety.** An agent run executes model-written shell commands and installs model-edited packages; our first local setup ran them with no sandbox.
 
-**Fidelity.** We call a *rendering trap* a configuration detail that silently changes the token sequence the model receives while runs still finish and score. The *scorer path* is the scorer's configuration reproduced locally. In our first setup the served model name contained "gemma4", so the agent framework (google-adk 1.36.1) sent tool results with role `tool_responses` instead of `tool` [5]. Prompts rebuilt from its traces matched the server's token counts on 106 of 114 calls only when rendered with `tool_responses` (0 of 114 with `tool`). Solve counts hid it: that setup solved 3 and 5 of 24 tasks against 4 and 4 on Kaggle (Fisher p 0.74 and 0.75).
+**Fidelity.** We call a *rendering trap* a configuration detail that silently changes the token sequence the model receives while runs still finish and score. The *scorer path* is the scorer's configuration reproduced locally. In our first setup the served model name contained "gemma4", so the agent framework (google-adk 1.36.1) sent tool results with role `tool_responses` instead of `tool` [5]. Prompts rebuilt from its traces matched the server's token counts on 106 of 114 calls only when rendered with `tool_responses` (0 of 114 with `tool`).
 
 These traps are public: the role rule [5], thought handling in history [6, 7, 8], a newline after thinking text [9], and the scorer's compaction settings [10]. We discovered none of them; we contribute checks that detect them (§4) and a measurement of three of them plus a template swap (§6).
 
@@ -42,7 +42,7 @@ Table 1. Runner versions.
 
 **Passing canaries proved little.** No attack escaped the container's namespaces or privileges in any round. Nine demonstrated high-severity vectors came through what the host shared with it: host-side steps that touched agent-written files, resource limits (a known class [13]) and the model server.
 
-**Final version.** Controls on 481 tasks (reference patch 481/481, empty patch 0/481) showed no verdict, exit-code or test-summary difference from the previous version. After the runner was killed, the container was gone within 149 s with no further model request. The final runner completed a 24-job list at 251–254 runs per hour with 8 workers.
+**Final version.** Controls on 481 tasks (reference patch 481/481, empty patch 0/481) showed no verdict, exit-code or test-summary difference from the previous version. The final runner completed a 24-job list at 251–254 runs per hour with 8 workers.
 
 **What remains.** Containers share the host kernel; user namespaces are not remapped; the request parser runs in the trusted runner; a job can slow others through the shared model server within its caps. Our claim is conditional: against the stated adversary and with the eight hashes matching, no tested attack succeeded.
 
@@ -65,7 +65,7 @@ Table 2. The eight checks.
 
 **Role.** From each google-adk release's source (only 1.36.1 was executed): 1.34.0–1.39.1 and 2.0–2.4 send `tool_responses` when the model string contains "gemma4"; 2.5–2.11 when it matches `gemma-?4`; 2.12–2.14 exempt three OpenAI-compatible providers [5]. The harness packages require `>=1.34.0,<2.0`.
 
-**Thoughts.** vLLM 0.19.1 reads an earlier assistant thought only from the field `reasoning`. google-adk 1.36.1 writes `reasoning_content`, which that server drops silently [8]; the competition harness writes both. Removing `reasoning` in a probe lost 55 of 55 thoughts from the rendered prompt.
+**Thoughts.** vLLM 0.19.1 reads an earlier assistant thought only from the field `reasoning`. google-adk 1.36.1 writes `reasoning_content`, which that server drops silently [8]; the competition harness writes both.
 
 **Template.** The check re-renders each request outside vLLM with the Kaggle template and compares token counts with the server's, or token ids when the server logs them, because identical strings can tokenize differently [16].
 
@@ -89,7 +89,7 @@ Candidate and baseline run on the same tasks and repeats. A candidate passes onl
 
 Table 3. Simulated pass rates (3,000 simulations per cell; 400 for the dropping row).
 
-The 2.5% level holds for exchangeable effects, not for skewed ones, and not if tasks are dropped after unblinding. Independent re-implementations matched the rule code on 280 of 280 clean datasets (first version) and, with rule readings aligned, 193 of 194 (amended). Applied three times, to screen leaders from one separate 48-task set (25, 22, 25 of 96 runs solved; baselines 19, 21, 20); none passed. Gains: −0.35 points on the small panel (p = 0.60); on the 128 large-panel tasks outside it, −0.39 (p = 0.60), then +4.10 (p = 0.04 > 0.025, uncorrected). Condition (5): first application only.
+The 2.5% level holds for exchangeable effects, not for skewed ones, and not if tasks are dropped after unblinding. Independent re-implementations matched the rule code on 280 of 280 clean datasets (first version) and, with rule readings aligned, 193 of 194 (amended). Applied three times, to screen leaders from one separate 48-task set; none passed. Gains: −0.35 points on the small panel (p = 0.60); on the 128 large-panel tasks outside it, −0.39 (p = 0.60), then +4.10 (p = 0.04 > 0.025, uncorrected). Condition (5): first application only.
 
 ## 6 Case study: four prompt divergences on E4B
 
@@ -111,11 +111,11 @@ No newline arm was run: both templates render it identically on this server.
 
 **Analysis, frozen before any outcome** (protocol sha256 `070c9655d96372d054f430727259de7b25af2ca93c3ec4c9295dfdc37aeb8cf4`). The estimand d_X is the mean over tasks of arm X's solve rate minus arm F's. The primary test is an exact two-sided task-level sign-flip test, Holm-corrected over the four arms at 0.05; only then do we say that X raises or lowers E4B's solve rate *on these tasks*. Intervals (unadjusted) invert that test. A repository-cluster bootstrap interval is secondary (lower simulated power). A frozen checker re-renders every returned request from the job's dump, matches the server's token count and confirms the job's arm; a failing job is re-run. Outcomes stayed blind until a pre-registered cut-off (2026-11-11 06:00 UTC) and were unblinded once.
 
-**Power, simulated before data.** The family-wise false-claim rate is 1.2–4.2%. At 231 tasks an even 5-point drop in one arm is detected with probability 82–100% across the simulated settings; the drop or gain detected with 80% power ranges from below 3 to about 5.2 points.
+**Power, simulated before data.** The family-wise false-claim rate is 1.2–4.2%. At 231 tasks an even 5-point drop in one arm is detected with probability 82–100% across the simulated settings.
 
 **Deviations recorded blind.** Independent validation of the final runner finished only after launch. From about an hour in, a second workload held about 9.6 GiB of GPU memory, so timings are under mixed load. The block stopped three times: after 967 jobs at the runner's open-file limit (cause unknown), after 378 more by an external termination signal on the shared machine, and after 3,074 more when the kernel's out-of-memory killer ended the model server (cause undiagnosed). Each resume ran only never-started jobs; the 24 interrupted jobs were re-run once.
 
-**Results.** All jobs finished before the cut-off. Every arm has a valid row in 924 of 924 slots, and the checker passed all 4,620 analysed jobs. No pre-emption was recorded; 6.0% of runs took over 240 s, above the pre-registered 5% threshold. No difference from F was detected for any arm (Table 4, Figure 1B; smallest Holm-adjusted p 0.44); the secondary repository-cluster intervals all include zero. The largest estimate is H's −2.1 points (unadjusted p 0.11; −1.3 with time-limit rows as missing). In exploratory measures, H runs averaged 137 s against 78 s and ended unsolved at the bundle's five-minute limit in 11.5% of runs against 1.8%; in C, 12.3% of runs ended unsolved on a rejected over-long prompt. These are null results, not evidence of no effect: the simultaneous 98.75% intervals allow a drop of 5.1 points (H) and a gain of 3.5 (T).
+**Results.** Every arm has a valid row in 924 of 924 slots, and the checker passed all 4,620 analysed jobs. 6.0% of runs took over 240 s, above the pre-registered 5% threshold. No difference from F was detected for any arm (Table 4, Figure 1B; smallest Holm-adjusted p 0.44); the secondary repository-cluster intervals all include zero. The largest estimate is H's −2.1 points (unadjusted p 0.11; −1.3 with time-limit rows as missing). In exploratory measures, H runs averaged 137 s against 78 s and ended unsolved at the bundle's five-minute limit in 11.5% of runs against 1.8%. These are null results, not evidence of no effect: the simultaneous 98.75% intervals allow a drop of 5.1 points (H) and a gain of 3.5 (T).
 
 ![Figure 1. (A) Solve-rate difference, local minus Kaggle (pooled 8/48), for eight local runs of one 24-task list (95% Newcombe intervals, runs treated as independent); shaded: the pass rule's ±3.45 points. (B) Change in solve rate against F on 231 tasks: estimates, 95% intervals and Holm-adjusted p.](fig1_parity_and_effects_v2.png)
 
@@ -134,7 +134,7 @@ Several paper-track resources overlap this one (described from their public text
 
 ## 9 Availability
 
-`drydock-eval` 0.4.0 (Apache-2.0) has three modules: `conform` (checks, mock server, mutation suite), `contain` (a reference runner tree, its escape tests, a gate helper) and `compare` (pass rule, sign-flip tests, simulations). Its 435 CPU tests pass. The released runner has not been run in a container as released: the 200 of 200 result is for the deployed tree, of which the release is an identifier-substituted copy with two canaries rewritten. Code: <https://github.com/MinhThanghus/drydock-eval> (tag `v0.4.0`; branch `paper`: supplement, §6 outcome rows). The package also carries copies of the §6 protocol, analysis code and job-list generator, redacted where needed, each with its original's sha256; the agent bundle and request dumps are planned for 2026-12-03.
+`drydock-eval` 0.4.0 (Apache-2.0) has three modules: `conform` (checks, mock server, mutation suite), `contain` (a reference runner tree, its escape tests, a gate helper) and `compare` (pass rule, sign-flip tests, simulations). Its 435 CPU tests pass. The released runner has not been run in a container as released: the 200 of 200 result is for the deployed tree, of which the release is an identifier-substituted copy with two canaries rewritten. Code: <https://github.com/MinhThanghus/drydock-eval> (tag `v0.4.0`; branch `paper`: supplement, §6 outcome rows). The package also carries copies of the §6 protocol, analysis code and job-list generator, redacted where needed; the agent bundle and request dumps are planned for 2026-12-03.
 
 ## References
 
