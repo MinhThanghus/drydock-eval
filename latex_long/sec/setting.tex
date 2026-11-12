@@ -1,0 +1,99 @@
+\section{Setting, terms and rules}\label{sec:setting}
+
+\input{fig/overview}
+
+\subsection{The competition and its scorer}
+
+A submission to the competition is an \emph{agent bundle}: a directory of configuration files for the google-adk agent
+framework, which names the agents, their prompts, their tools, their sampling settings and their limits. The base
+model is not part of the bundle: the scorer loads the bundle into the competition's harness, serves one Gemma 4 model
+with vLLM on four L4 GPUs, and runs the agent on hidden tasks one after another. A task is an issue of a public Python
+repository at a fixed commit. The agent works in a sandbox with the repository checked out, and ends by submitting a
+patch. The task counts as solved if hidden tests pass after the patch is applied. The whole scoring run has a time limit
+of 12 hours, so a slow agent loses tasks at the end. A team may submit once per day, and the public leaderboard shows the
+solved share on 58 of the hidden tasks.
+
+Two properties of this setting drive the rest of the paper. First, one hosted score is a draw with a standard
+deviation near 1.5 tasks of 58 \citep{afshar2026census,mobassir2026toosmall}, and there is one draw per day. Second,
+the scorer's configuration is public in a starter notebook \citep{holbrook2026starter}, but a local stack can differ
+from it in ways that do not stop a run (\cref{sec:conform}).
+
+\subsection{Models and software}
+
+\paragraph{Stack.} Gemma 4 E4B, 4-bit quantization-aware checkpoint (Kaggle model version 2); vLLM 0.19.1; google-adk
+1.36.1; the competition's harness packages. The experiments of \cref{sec:big} use the 31B model, also as a 4-bit
+quantization-aware checkpoint. The serving measurements of \cref{sec:serving} add the 12B model. We write 31B, 12B and
+E4B for the three models. E4B is one of the two models that are eligible for the small-model prize of the competition,
+and it is the model of the kit's main use.
+
+\subsection{Machines}
+
+Agent runs were made on three kinds of machine, and every released row names its kind.
+
+\paragraph{Emulated latency.} The first experiments with the 31B model ran on a rented cloud machine with one large
+GPU. Its server answers faster than the scorer's four L4 GPUs, so each model call was padded to the duration that a
+latency model predicts for the scorer's hardware: $0.15 + 0.032\,c + 0.0007\,n$ seconds for a call that generates $c$
+tokens after $n$ new prompt tokens. We fitted this model to public call logs from real four-L4 hardware
+\citep{moshegolderson2026freshswe}. Several jobs ran at the same time, and the load differed between
+blocks; this is why arms are compared within a block wherever possible. \Cref{sec:big-real} compares the emulation with
+real hardware.
+
+\paragraph{Four L4 GPUs.} Kaggle notebooks with four L4 GPUs are the hardware type of the scorer. Jobs ran there with the
+server flags of the starter notebook and without padding. Notebook hours are limited by a weekly quota, so
+these blocks are small.
+
+\paragraph{Workstation.} Experiments with E4B from \cref{sec:parity} on ran on a shared single-GPU workstation
+(RTX 5090, 32 GB), with eight jobs at a time and each job in a container of the runner of \cref{sec:contain}. This is
+the machine for which the kit was built; it finishes about 250 runs per hour.
+
+\subsection{Tasks}
+
+\paragraph{Development tasks.} The competition distributes development tasks with its harness. We used 70 of them,
+from four repositories: a first set of 30 and 40 further tasks.
+Competition data may not be redistributed, so the released rows name these tasks by opaque codes
+(\texttt{dev-001} and so on) and give only their repository.
+
+\paragraph{Berth.} Tasks for the work on E4B come from Berth \citep{patel2026berth}: 579 of its 653 tasks load in the
+harness and pass our validation (the reference patch passes, an empty patch fails). The released rows keep the Berth
+task identifiers. Four task sets were drawn from these 579 tasks: a screen set S of 48 tasks, a small panel C of 72 tasks in 18 repositories, a large panel of 200 tasks
+in 20 repositories that contains C, and the case-study panel of 231 tasks in 15 repositories. We write H for the 128
+tasks of the large panel that are outside C. S, the large panel and the case-study panel share no task. The two panels were frozen before any outcome on them
+existed (\cref{sec:compare}). S contains the 24 tasks of the parity runs of \cref{sec:parity}, on which results of the
+baseline were known before the screens ran; \cref{sec:programmes} comes back to this.
+
+\subsection{Terms}
+
+A \emph{run} is one agent job on one task: the harness prepares the sandbox, the agent works until it submits or is
+stopped, and the harness grades the patch. A run is \emph{solved} or not; a run that ends without a patch or by a limit
+counts as not solved. An \emph{arm} is one agent configuration, that is, one bundle with its settings. A \emph{block}
+is one session on one machine in which one or more arms ran over one task list in a single job queue; a block with
+several arms interleaves them, so they share the load and the time of day. A \emph{repeat} is one of several runs of
+the same arm on the same task within a block. \emph{Points} are percentage points of the solve rate. A
+\emph{task-equivalent} is one task solved in every repeat, or the same number of solved runs spread over tasks.
+Arms carry neutral labels (\cref{tab:arms}); block labels name the experiment (\cref{tab:blocks}).
+
+Counts of solved runs come with 95\% Wilson intervals where a single arm is described. Two arms on the same tasks
+with one run per task are compared by the exact two-sided sign test on the tasks that only one of them solved. With
+repeats, and for every decision about a candidate, the tests of \cref{sec:compare} are used. A null result is worded
+``no difference was detected''; none of the experiments below was sized to show that two arms are equal.
+
+\subsection{Threat model}
+
+The adversary is the code the agent writes. It may try to read host files or other jobs, reach the network, exhaust
+host resources, forge its verdict, or outlive its job. Kernel exploits are out of scope.
+
+\subsection{Who did the work, and what is withheld}
+
+\paragraph{Who did the work.} AI agents wrote the kit's code, attacks and analyses (builders). Separate AI agents
+(verifiers) re-implemented or re-ran the work adversarially. A lead AI session froze the protocols; a human owner
+approved isolation, machine time and release. ``Verified'' below means this process, not human review. The same holds
+for the experiments that this version adds: AI agents built the arms, ran the blocks and wrote the analysis scripts
+and this text, and the owner approved each hosted submission and each release.
+
+\paragraph{What is withheld.} The competition is still running. The E4B agent bundle that serves as the baseline of
+\cref{sec:small,sec:case,sec:programmes}, the changed bundles derived from it, their prompts, the fine-tuned adapter
+of \cref{sec:small-first} and its training data are withheld for now; the release of the bundle and of the request
+dumps of the case study is planned for 2026-12-03. The arms are therefore described by the kind of change and not by
+their text (\cref{tab:arms}). What is released is the outcome and the measurements of every run. Two 31B arms are
+public bundles run unchanged: \arm{BF5} is the public Budget-Fit V5 configuration, the most-run public
+configuration in the hosted-score census of \citet{afshar2026census}, and \arm{ID24} is a bundle of the public collection of \citet{idris2026runs}.

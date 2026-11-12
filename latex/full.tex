@@ -1,0 +1,28 @@
+% The paper followed by its supplementary material, in one file. Build as main.tex and supplement.tex, then
+% tectonic -X compile full.tex.
+\documentclass[11pt]{article}
+\input{preamble}
+\newcommand{\papersec}[1]{Section~\ref{sec:#1}}
+\newcommand{\papertab}[1]{Table~\ref{tab:#1}}
+\newcommand{\paperfig}[1]{Figure~\ref{fig:parity}}
+\newcommand{\papercite}[2]{\cite{#1}}
+
+\title{\papertitle\\[6pt]
+\large \papersubtitle}
+\author{\paperauthor}
+\date{\paperdate}
+
+\begin{document}
+\maketitle
+
+\input{gen/abstract}
+\input{gen/body}
+\input{gen/refs}
+
+\clearpage
+\begin{center}
+{\Large\bfseries Supplementary material}
+\end{center}
+\supplementnumbering
+\input{supp/supp_body}
+\end{document}

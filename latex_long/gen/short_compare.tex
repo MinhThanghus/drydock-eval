@@ -1,0 +1,32 @@
+% written by scripts/reuse_short.py from the sources of the short paper; do not edit
+Tasks from one repository succeed and fail together. Clustered inference for model evaluations is prior art \citep{miller2024errorbars}; \texttt{compare} packages a small-cluster version with a frozen pass rule and its simulated behaviour.
+
+Candidate and baseline run on the same tasks and repeats. A candidate passes only if (1) the mean gain is at least 2/58 (3.45 points, two leaderboard tasks); (2) one-sided p \ensuremath{\le} 0.025 under a null-imposed wild cluster bootstrap-t over repositories, with Rademacher weights and 9,999 draws \citep{cameron2008bootstrap,mackinnon2017wild}; (3) at least three repositories gain and every leave-one-repository-out estimate is positive; (4) agent time stays within 1.2 times baseline and infrastructure errors do not rise; and (5) no repository loses two task-equivalents or more. Two panels were frozen before any outcome: a small one (72 tasks, 18 repositories) and a large one (200 tasks, 20 repositories).
+
+\begin{table}[!tb]
+\centering
+\caption{Simulated pass rates (3,000 simulations per cell; 400 for the dropping row).}\label{tab:simulated}
+\footnotesize
+\begin{tabular}{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5800}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2100}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2100}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Simulated scenario
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Small panel
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Large panel
+\end{minipage} \\
+\midrule
+No effect, exchangeable tasks & 0.23--1.90\% & 0.00--0.50\% \\
+No mean effect, candidate breaks 20\% of repositories & 7.50\% & 8.43\% \\
+No effect, worst tasks dropped after seeing outcomes & 31.75\% & 40.75\% \\
+Even gain of 3/58 (power) & \ensuremath{\approx}60\% & \ensuremath{\approx}90\% \\
+Gain confined to four repositories (power) & 15.9\% & 24.9\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 2.5\% level holds for exchangeable effects, not for skewed ones, and not if tasks are dropped after unblinding. Independent re-implementations matched the rule code on 280 of 280 clean datasets (first version) and, with rule readings aligned, 193 of 194 (amended). Applied three times, to screen leaders from one separate 48-task set (25, 22, 25 of 96 runs solved; baselines 19, 21, 20); none passed. Gains: \ensuremath{-}0.35 points on the small panel (p = 0.60); on the 128 large-panel tasks outside it, \ensuremath{-}0.39 (p = 0.60), then +4.10 (p = 0.04 \textgreater{} 0.025, uncorrected). Condition (5): first application only.

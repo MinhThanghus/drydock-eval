@@ -1,0 +1,12 @@
+% written by scripts/reuse_short.py from the sources of the short paper; do not edit
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Solve-level parity is not refuted, not established.} The evidence (Figure~\ref{fig:parity}A) is one 24-task list, one repeat per run; ten runs solved only six distinct tasks.
+\item
+  \textbf{Kaggle-side facts are partly inferred}: the hosted google-adk release, tool-schema equality, and the identity of the hosted template and weights with the public Kaggle model.
+\item
+  \textbf{Environment differences remain.} One RTX 5090 instead of four L4s; 2 CPUs and 10 GiB per job; a bare \texttt{pytest} command, used in 30 of 216 commands in our Kaggle traces, is absent locally.
+\item
+  \textbf{The case study} covers one model, one bundle, one google-adk release and one configuration per divergence. Arm T swaps a whole template; in arm H thoughts still reach compaction summaries.
+\end{itemize}

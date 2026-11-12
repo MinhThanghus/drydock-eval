@@ -1,0 +1,26 @@
+[
+ {
+  "application": 1,
+  "block": "confirm-1",
+  "candidate": "v-p2",
+  "decision": "FAIL",
+  "time_ratio": 1.0263774850998209,
+  "quantities_checked": 34
+ },
+ {
+  "application": 2,
+  "block": "confirm-2",
+  "candidate": "v-t6",
+  "decision": "FAIL",
+  "time_ratio": 1.1822799009547835,
+  "quantities_checked": 35
+ },
+ {
+  "application": 3,
+  "block": "confirm-3",
+  "candidate": "v-a3",
+  "decision": "FAIL",
+  "time_ratio": 1.1029795961552549,
+  "quantities_checked": 35
+ }
+]

@@ -1,0 +1,32 @@
+block,experiment,model,machine,task_source,tasks,repositories,arms,repeats,runs,solved,note
+pub31-1,pub31,31B,colab_emulated_l4,competition_dev,30,4,BF5 BF5-p W1,1,90,55,first 30 development tasks
+pub31-2,pub31,31B,colab_emulated_l4,competition_dev,30,4,W1-b,1,30,17,same 30 tasks
+pub31-3,pub31,31B,colab_emulated_l4,competition_dev,30,4,W1-p,1,30,15,same 30 tasks
+pub31-4,pub31,31B,colab_emulated_l4,competition_dev,30,4,SH1 W3,1,60,36,"same 30 tasks, both arms in one queue"
+pub31-5,pub31,31B,colab_emulated_l4,competition_dev,40,3,BF5 W2,1,80,39,40 further development tasks
+pub31-6,pub31,31B,colab_emulated_l4,competition_dev,40,3,SH3 W3,1,80,43,"same 40 tasks, both arms in one queue"
+pub31-7,pub31,31B,colab_emulated_l4,competition_dev,70,4,SH5,1,70,41,all 70 tasks
+pub31-8,pub31,31B,colab_emulated_l4,competition_dev,70,4,BF5 SH5 SH6,1,130,80,all 70 tasks; 30 tasks with masked test runners
+l4-1,l4check,31B,kaggle_4xl4,competition_dev,10,4,SH5,1,12,7,"10 tasks, plus 2 masked"
+l4-2,l4check,31B,kaggle_4xl4,competition_dev,24,4,SH6,1,24,14,24 tasks
+pubE4-1,pubE4,E4B,kaggle_4xl4,competition_dev,24,3,e-single e-wrap e-wrap-ad,1,72,15,24 development tasks with small fixes
+berth31-time,berth31,31B,kaggle_4xl4,berth,10,10,BF5 BF5-s ID24 ID24-r,1,40,16,"10 tasks, serial"
+berth31-check,berth31,31B,kaggle_4xl4,berth,16,16,BF5 BF5-c,2,64,24,16 tasks
+berthE4-k1,berthE4,E4B,kaggle_4xl4,berth,24,20,base e-BF,2,96,12,24 tasks
+berthE4-k2,berthE4,E4B,kaggle_4xl4,berth,8,8,base base-p e-BF e-BF-s,2,64,20,8 tasks
+parity-1,parity,E4B,workstation,berth,24,20,base,1,24,3,"no sandbox, 8 workers"
+parity-2,parity,E4B,workstation,berth,24,20,base,1,24,5,"no sandbox, 1 worker"
+parity-3,parity,E4B,workstation,berth,24,20,base,1,24,3,"container runner, version 1"
+parity-4,parity,E4B,workstation,berth,24,20,base,1,24,2,"container runner, version 3"
+parity-5,parity,E4B,workstation,berth,24,20,base,1,24,4,"container runner, version 4, run a"
+parity-6,parity,E4B,workstation,berth,24,20,base,1,24,3,"container runner, version 4, run b"
+parity-7,parity,E4B,workstation,berth,24,20,base,1,24,5,"container runner, version 7 (final)"
+screen-1,cand1,E4B,workstation,berth,48,20,base v-b1 v-p1 v-p2 v-p3 v-p4,2,576,136,screen set S
+confirm-1,cand1,E4B,workstation,berth,72,18,base v-p2,4,576,125,small panel C
+pilot-2a,cand2,E4B,workstation,berth,15,15,v-t1 v-t2,1,30,9,15 tasks of the case-study panel
+pilot-2b,cand2,E4B,workstation,berth,15,15,v-t3 v-t4 v-t5 v-t6,1,60,22,same 15 tasks
+screen-2,cand2,E4B,workstation,berth,48,20,base v-t4 v-t6,2,288,61,screen set S
+confirm-2,cand2,E4B,workstation,berth,128,19,base v-t6,4,1024,204,panel H
+dev-3,cand3,E4B,workstation,berth,16,6,base v-a1 v-a2,1,48,9,16 tasks of panel C
+screen-3,cand3,E4B,workstation,berth,48,20,base v-a3 v-a4,2,288,64,screen set S
+confirm-3,cand3,E4B,workstation,berth,128,19,base v-a3,4,1024,215,"panel H, second use"

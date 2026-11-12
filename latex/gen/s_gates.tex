@@ -1,0 +1,32 @@
+\begin{table}[!htb]
+\centering
+\caption{Every application of the pass rule of Section 5 to a real candidate, from the frozen gate reports. Baseline and candidate are two versions of the withheld agent bundle.}\label{tab:s-gates}
+\footnotesize
+\begin{tabular}{lrrr}
+\toprule
+ & Application 1 & Application 2 & Application 3 \\
+\midrule
+Task set & small panel & large panel minus small & as application 2 \\
+Tasks; repositories; repeats & 72; 18; 4 & 128; 19; 4 & 128; 19; 4 \\
+Runs per arm (all with a result row) & 288 & 512 & 512 \\
+Solved runs: baseline, candidate & 63, 62 & 103, 101 & 97, 118 \\
+Mean gain (points; exact fraction) & ${-}0.35$ (${-}1/288$) & ${-}0.39$ (${-}1/256$) & ${+}4.10$ ($21/512$) \\
+\quad (1) gain at least $2/58$ & not met & not met & met \\
+Bootstrap-$t$; one-sided $p$ (9{,}999 draws) & ${-}0.175$; 0.6034 & ${-}0.366$; 0.6034 & ${+}1.954$; 0.0405 \\
+One-sided $p$ by exact enumeration & 0.6113 & 0.6067 & 0.0360 \\
+\quad (2) $p \le 0.025$ & not met & not met & not met \\
+Repositories gaining; losing & 3; 6 & 7; 6 & 9; 6 \\
+\quad (3a) at least three repositories gain & met & met & met \\
+Lowest leave-one-repository-out gain (points) & ${-}1.47$ & ${-}0.85$ & ${+}2.94$ \\
+\quad (3b) every leave-one-out gain positive & not met & not met & met \\
+Agent time, candidate / baseline (s) & 68.4 / 66.6 & 89.3 / 75.6 & 79.4 / 72.0 \\
+\quad (4a) ratio at most 1.2 & 1.026: met & 1.182: met & 1.103: met \\
+Infrastructure rows: baseline, candidate & 0, 0 & 0, 0 & 0, 0 \\
+\quad (4b) infrastructure errors do not rise & met & met & met \\
+Worst repository total (task-equivalents) & ${-}0.50$ & ${-}0.50$ & ${-}0.50$ \\
+\quad (5) no repository loses two or more & met & not registered & not registered \\
+\midrule
+Decision of the frozen rule & \textbf{FAIL} & \textbf{FAIL} & \textbf{FAIL} \\
+\bottomrule
+\end{tabular}
+\end{table}

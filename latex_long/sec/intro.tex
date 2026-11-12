@@ -1,0 +1,80 @@
+\section{Introduction}\label{sec:intro}
+
+The competition scores an agent bundle on hidden GitHub-issue tasks, with Gemma 4 served by vLLM \citep{kwon2023vllm}.
+Third-party analyses put the noise of one hosted score near 1.5 of 58 tasks \citep{afshar2026census,mobassir2026toosmall}.
+With one submission per day, a hosted score cannot separate two agents that differ by a few tasks. Local evaluation must
+therefore carry development; on a Kaggle kernel with four L4 GPUs our stack finished 35.2 agent runs per hour, serially.
+A local evaluator has to answer three questions before its numbers mean anything.
+
+\paragraph{Safety.} An agent run executes model-written shell commands and installs model-edited packages; our first
+local setup ran them with no sandbox.
+
+\paragraph{Fidelity.} We call a \emph{rendering trap} a configuration detail that silently changes the token sequence
+the model receives while runs still finish and score. The \emph{scorer path} is the scorer's configuration reproduced
+locally. In our first setup the served model name contained ``gemma4'', so the agent framework (google-adk 1.36.1) sent
+tool results with role \texttt{tool\_responses} instead of \texttt{tool} \citep{adk2026toolresponses}. Prompts rebuilt
+from its traces matched the server's token counts on 106 of 114 calls only when rendered with \texttt{tool\_responses}
+(0 of 114 with \texttt{tool}). Solve counts hid it: that setup solved 3 and 5 of 24 tasks against 4 and 4 on Kaggle
+(Fisher p 0.74 and 0.75).
+
+These traps are public: the role rule \citep{adk2026toolresponses}, thought handling in history
+\citep{google2026gemma4prompt,dimondev2026hf44,delta90002026vllm38488}, a newline after thinking text
+\citep{gerganov2026hf135}, and the scorer's compaction settings \citep{holbrook2026starter}. We discovered none of them;
+we contribute checks that detect them (\cref{sec:conform}) and a measurement of three of them plus a template swap
+(\cref{sec:case}).
+
+\paragraph{Inference.} Tasks from one repository succeed and fail together, a small model solves about one task in
+five, and a development team looks at many variants. A difference between two arms then needs a paired design, an
+analysis that respects repositories, and a rule that is fixed before the outcomes are read.
+
+\paragraph{What this version adds.} This is the extended version of a paper of 3,000 words written for the
+competition's paper track \citep{markowitz2026papertrack}. \Cref{sec:contain,sec:conform,sec:compare,sec:case-design}
+repeat the text of that paper, and \cref{sec:case,sec:programmes} include the text of its supplement. Everything else is
+new here. The short paper describes the kit and one experiment. It leaves out most of what was measured while the kit
+was built and used: the throughput of the serving stack, the experiments with the 31B model that came before the work
+on the small model, the first experiments with E4B, the runs that compared the workstation with the hosted notebook,
+and the three candidate changes of the E4B agent that were taken through a screen and a confirmation. This version
+reports all of them, with every run as a released row.
+
+\paragraph{Contributions.}
+\begin{itemize}
+\item \textbf{A kit.} \kit{} has three modules. \emph{Contain} is a container runner for agent jobs together with the
+record of the attacks that seven versions of it failed (\cref{sec:contain}). \emph{Conform} is a set of eight checks
+that compare the requests of a local stack with the scorer path (\cref{sec:conform}). \emph{Compare} is a set of paired
+tests with repositories as clusters and a pass rule whose behaviour was simulated before use (\cref{sec:compare}).
+\item \textbf{A measurement of four prompt divergences} on E4B in a pre-registered experiment with five arms, 231 tasks
+and 4,620 jobs (\cref{sec:case}).
+\item \textbf{Serving measurements} of three Gemma 4 models on the hardware type of the scorer, including the cost of
+serving a LoRA adapter (\cref{sec:serving}).
+\item \textbf{The record of \RunsTotal{} further agent runs} in \BlocksTotal{} blocks and \ArmsTotal{} arms:
+\RunsThirtyOne{} with the 31B model (\cref{sec:big}) and \RunsEFour{} with E4B (\cref{sec:small,sec:programmes}),
+together with \ControlRows{} control gradings of the task pool.
+\item \textbf{Three complete screen-and-confirm programmes} for a change of the E4B agent, each with its selection
+step, its frozen rule and its outcome (\cref{sec:programmes}), and an analysis of what they say about noise and
+selection (\cref{sec:analysis}).
+\item \textbf{Data and scripts.} Every table and figure of \cref{sec:serving,sec:big,sec:small,sec:programmes,sec:analysis}
+is computed by a released script from released files (\cref{sec:avail}).
+\end{itemize}
+
+\paragraph{Main findings.}
+Most of the results are null results, and we report them as such.
+\begin{itemize}
+\item No attack on the runner escaped the container's namespaces or privileges, but nine demonstrated high-severity
+vectors came through what the host shared with it, in designs that passed their own escape tests.
+\item Four prompt divergences from the scorer path changed the E4B solve rate by less than the experiment could
+detect; its simultaneous intervals leave room for a drop of up to \SHSimLo{} points and a gain of up to
+\STSimHi{} points.
+\item Six configurations of a 31B agent, from a public single agent to a wrapped agent with a shell-only coder, solved
+\PubMinSeventy{} to \PubMaxSeventy{} of the same 70 tasks; no pairwise difference was detected, and
+\PubBetweenSix{} of the 70 tasks were solved by some configurations and not by others.
+\item Each of three E4B candidates led its screen. On new tasks the first two had estimated gains below zero. The third
+gained \GainThree{} points, with a one-sided $p$ of \GatePThree{} against a required 0.025: not confirmed.
+\item When the unchanged baseline ran again on the same 128 tasks, its total moved by \RepeatHDiff{} points.
+\HNever{} of these tasks were solved in none of eight runs and \HAlways{} in all eight, so the remaining
+\HBetween{} tasks carry all of the repeat-to-repeat noise.
+\end{itemize}
+
+\Cref{sec:setting} gives the setting and the terms. \Cref{sec:serving} reports the serving measurements.
+\Cref{sec:contain,sec:conform,sec:compare} describe the three modules. \Cref{sec:big,sec:small} report the experiments
+with the two models, \cref{sec:case} the case study, and \cref{sec:programmes} the three candidate programmes.
+\Cref{sec:analysis} draws the experiments together; related work, limitations and availability follow.

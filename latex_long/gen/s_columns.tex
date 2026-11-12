@@ -1,0 +1,38 @@
+\begin{table}[!htb]
+\centering
+\caption{Columns of \texttt{e8\_runs.csv}. The rows of interrupted jobs hold the first ten columns and the two times of day only.}\label{tab:s-columns}
+\footnotesize
+\begin{tabular}{lp{11.4cm}}
+\toprule
+Column & Content \\
+\midrule
+\texttt{batch} & 1 to 5: the batch of the block in which the job ran; batch 5 holds the re-runs \\
+\texttt{stage} & 1, 2 or 3: the nested stage of the job list that holds the task (118, 37 and 76 tasks) \\
+\texttt{arm} & F, R, C, H or T \\
+\texttt{task} & task identifier in the public task collection the panel was drawn from \\
+\texttt{repository} & repository of the task (owner/name); the unit of clustering \\
+\texttt{repeat} & 1 to 4 \\
+\texttt{attempt} & 1; 2 for the re-run of an interrupted job \\
+\texttt{row\_class} & agent: an analysed run. infrastructure: an interrupted job, not analysed \\
+\texttt{outcome\_id} & A00 solved; A01 unsolved, run completed; A02 tool-call budget reached; A05 unsolved at the five-minute limit; A06 no submission; A18 unsolved, over-long prompt rejected; I09 interrupted job \\
+\texttt{resolved} & 1 if the run is solved (the tests of the task pass on the edits the run left), else 0 \\
+\texttt{t\_agent\_s} & seconds of the agent phase of the job \\
+\texttt{t\_setup\_s} & seconds of the setup phase, before the agent starts \\
+\texttt{t\_verify\_s} & seconds of the grading phase; empty if no test was run \\
+\texttt{model\_calls} & chat requests of the run that returned a response \\
+\texttt{model\_calls\_failed} & chat requests of the run that raised an error instead \\
+\texttt{tool\_calls} & tool calls made by the agent \\
+\texttt{tokens\_in} & prompt tokens, summed over the requests of the run \\
+\texttt{tokens\_out} & completion tokens, summed over the requests of the run \\
+\texttt{max\_prompt\_tokens} & largest prompt of the run, in tokens \\
+\texttt{summaries} & history summaries (compactions) made during the run \\
+\texttt{patch\_chars} & characters of the diff the run left; 0 if none \\
+\texttt{test\_exit} & exit status of the test command; 0 = tests passed; $-1$ = no test was run \\
+\texttt{start\_utc} & start of the job (UTC) \\
+\texttt{end\_utc} & end of the job (UTC) \\
+\texttt{requests\_checked} & returned requests of the run that the frozen checker re-rendered \\
+\texttt{requests\_changed} & of them, requests whose prompt the reference rule of arm F would render differently (the exposure count; 0 in F) \\
+\texttt{check\_passed} & 1 if the run passed the prompt check \\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,18 @@
+\begin{table}[!htb]
+\centering
+\caption{Exposure: requests re-rendered by the frozen checker, and those whose rendered prompt the arm's divergence changed.}\label{tab:s-exposure}
+\footnotesize
+\begin{tabular}{lrrrrr}
+\toprule
+Arm & Runs & Requests checked & Changed by the divergence & Share (\%) & Failed calls recorded \\
+\midrule
+F & 924 & 15{,}043 & 0 & 0.0 & 17 \\
+R & 924 & 15{,}290 & 13{,}616 & 89.1 & 20 \\
+C & 924 & 13{,}036 & 2{,}709 & 20.8 & 131 \\
+H & 924 & 17{,}450 & 15{,}684 & 89.9 & 112 \\
+T & 924 & 14{,}787 & 12{,}629 & 85.4 & 19 \\
+\bottomrule
+\end{tabular}
+
+\par\smallskip\parbox{0.96\linewidth}{\footnotesize No run has more than one failed call. Of the 299 failed calls, 178 are in runs unsolved at the five-minute limit, 115 in runs that ended on a rejected over-long prompt and 6 in solved runs.}
+\end{table}

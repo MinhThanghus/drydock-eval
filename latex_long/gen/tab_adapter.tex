@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Cost of serving a LoRA adapter with the 31B model (same server settings; requests addressed to the adapter). Decode speed in tokens per second per stream; change against the control in brackets.}
+\label{tab:adapter}
+\begin{tabular}{lrrrr}
+\toprule
+Server & KV cache, tokens & 2k context, 1 stream & 8k, 1 stream & 8k, 4 streams \\
+\midrule
+no adapter (control) & 46{,}352 & 38.3 & 36.4 & 29.4 \\
+rank 16, attention projections & 37{,}328 & 33.9 (\ensuremath{-}12\%) & 32.4 (\ensuremath{-}11\%) & 26.9 (\ensuremath{-}9\%) \\
+rank 16, all linear layers & 37{,}328 & 33.8 (\ensuremath{-}12\%) & 32.5 (\ensuremath{-}11\%) & 26.9 (\ensuremath{-}9\%) \\
+rank 8, two module types & 37{,}568 & 33.3 (\ensuremath{-}13\%) & 32.1 (\ensuremath{-}12\%) & 26.7 (\ensuremath{-}9\%) \\
+\bottomrule
+\end{tabular}
+\end{table}

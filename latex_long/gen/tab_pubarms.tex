@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{The 31B arms on the development tasks, one run per task, with emulated L4 latency. Top: the first 30 tasks. Middle: 40 further tasks. Bottom: all 70. Wall: mean seconds per job. Out: mean generated tokens. T/O: runs stopped by the session time limit. Empty: runs that left no patch. Sum.: runs with at least one history summary.}
+\label{tab:pubarms}
+\begin{tabular}{llrrrrrrrrrr}
+\toprule
+Block & Arm & Tasks & Solved & \% & 95\% interval & Wall & Out & Calls & T/O & Empty & Sum. \\
+\midrule
+\texttt{pub31-1} & \texttt{BF5} & 30 & 17 & 57 & 39--73 & 303 & 6{,}893 & 24.2 & 5 & 1 & 18 \\
+\texttt{pub31-1} & \texttt{BF5-p} & 30 & 18 & 60 & 42--75 & 296 & 6{,}921 & 23.1 & 4 & 4 & 19 \\
+\texttt{pub31-1} & \texttt{W1} & 30 & 20 & 67 & 49--81 & 254 & 5{,}942 & 22.4 & 3 & 4 & 0 \\
+\texttt{pub31-2} & \texttt{W1-b} & 30 & 17 & 57 & 39--73 & 290 & 6{,}394 & 23.4 & 7 & 7 & 0 \\
+\texttt{pub31-3} & \texttt{W1-p} & 30 & 15 & 50 & 33--67 & 304 & 6{,}412 & 25.2 & 11 & 12 & 0 \\
+\texttt{pub31-4} & \texttt{W3} & 30 & 16 & 53 & 36--70 & 272 & 7{,}448 & 30.6 & 4 & 6 & 0 \\
+\texttt{pub31-4} & \texttt{SH1} & 30 & 20 & 67 & 49--81 & 237 & 6{,}739 & 24.5 & 1 & 2 & 0 \\
+\addlinespace
+\texttt{pub31-5} & \texttt{BF5} & 40 & 20 & 50 & 35--65 & 338 & 7{,}032 & 23.3 & 8 & 2 & 29 \\
+\texttt{pub31-5} & \texttt{W2} & 40 & 19 & 48 & 33--63 & 312 & 6{,}582 & 24.4 & 7 & 6 & 0 \\
+\texttt{pub31-6} & \texttt{W3} & 40 & 22 & 55 & 40--69 & 260 & 7{,}399 & 25.6 & 2 & 6 & 0 \\
+\texttt{pub31-6} & \texttt{SH3} & 40 & 21 & 52 & 37--67 & 223 & 6{,}109 & 24.4 & 3 & 7 & 0 \\
+\addlinespace
+\texttt{pub31-7} & \texttt{SH5} & 70 & 41 & 59 & 47--69 & 272 & 7{,}821 & 27.0 & 6 & 7 & 0 \\
+\texttt{pub31-8} & \texttt{SH6} & 70 & 44 & 63 & 51--73 & 280 & 7{,}978 & 25.6 & 7 & 8 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}

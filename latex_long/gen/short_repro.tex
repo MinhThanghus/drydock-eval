@@ -1,0 +1,24 @@
+% written by scripts/reuse_short.py from the sources of the short paper; do not edit
+The released table \texttt{e8\_compare\_table.csv} is in the input format of the \texttt{compare} module of the kit.
+From a clone of the repository, two commands recompute the analysis:
+
+\begin{verbatim}
+pip install "./drydock-eval[compare]"
+drydock-eval compare signflip e8_compare_table.csv --reference F --repeats 4
+\end{verbatim}
+
+We ran this command from the released source tree with the script \texttt{supp/reproduce.py}, which stops on any
+mismatch. For all four arms the command returned the registered estimate, the exact $p$ as the same fraction, the
+Holm-adjusted $p$ and every repository-level quantity of Table~\ref{tab:s-repolevel}.
+
+Two quantities depend on Monte Carlo draws: the inverted intervals, and the Monte Carlo $p$ that is reported next to
+the exact one. The draws are frozen (seed \SReproSeed), but which draw meets which task depends on the order of the
+tasks. The registered analysis used the order of the panel file; the command sorts the task identifiers. With the
+tasks in panel order, the routine of the kit returns the registered values to the last digit
+(Table~\ref{tab:s-repro}). With the order of the command, the ends of the 95\% intervals move by at most
+\SReproMoveNinetyFive{} points and those of the simultaneous intervals by at most \SReproMoveSim{} points. The largest
+move is the upper end of the interval of H, $+\SReproHCmdHi$ instead of $+\SReproHRegHi$ points. The $p$-value of the
+test is a step function of the shift, and across that stretch it stays between \SReproStepLo{} and \SReproStepHi{},
+next to the 0.05 it is compared with. Both intervals include zero. The paper reports the registered intervals.
+
+\input{gen/s_repro}

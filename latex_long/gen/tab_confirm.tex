@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\footnotesize\setlength{\tabcolsep}{3.6pt}
+\caption{The three applications of the pass rule (four repeats per task and arm). Gain: candidate minus baseline in percentage points. $p$: one-sided, repository-clustered. $+/-$: repositories with a positive or negative summed gain. LOO: lowest gain when one repository is left out. Time: ratio of mean agent time, candidate to baseline.}
+\label{tab:confirm}
+\begin{tabular}{rlrrrrrrrrrrl}
+\toprule
+No. & Candidate & Tasks & Repos & Runs/arm & Base & Cand. & Gain & $p$ & $+/-$ & LOO & Time & Verdict \\
+\midrule
+1 & \texttt{v-p2} & 72 & 18 & 288 & 63 & 62 & \ensuremath{-}0.35 & 0.6034 & 3/6 & \ensuremath{-}1.47 & 1.03 & not confirmed \\
+2 & \texttt{v-t6} & 128 & 19 & 512 & 103 & 101 & \ensuremath{-}0.39 & 0.6034 & 7/6 & \ensuremath{-}0.85 & 1.18 & not confirmed \\
+3 & \texttt{v-a3} & 128 & 19 & 512 & 97 & 118 & +4.10 & 0.0405 & 9/6 & +2.94 & 1.10 & not confirmed \\
+\bottomrule
+\end{tabular}
+\end{table}

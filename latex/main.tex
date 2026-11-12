@@ -1,0 +1,18 @@
+% Contain, Conform, Compare (drydock-eval): the paper. Build: python3 -I -B build_tex.py <draft.md> <sha256>, then
+% tectonic -X compile main.tex.   gen/ is written by build_tex.py from the checked markdown draft: do not edit it by hand.
+\documentclass[11pt]{article}
+\input{preamble}
+
+\title{\papertitle\\[6pt]
+\large \papersubtitle}
+\author{\paperauthor}
+\date{\paperdate}
+
+\begin{document}
+\maketitle
+
+\input{gen/abstract}
+\input{gen/body}
+\input{gen/refs}
+
+\end{document}

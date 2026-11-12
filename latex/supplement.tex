@@ -1,0 +1,20 @@
+% Supplementary material, on its own. Build: supp/build_supp.py and supp/reproduce.py (tables and numbers),
+% figsrc/fig_supp.py (figures), then tectonic -X compile supplement.tex.
+\documentclass[11pt]{article}
+\input{preamble}
+% references to the paper, which is another file in this build
+\newcommand{\papersec}[1]{Section~#1 of the paper}
+\newcommand{\papertab}[1]{Table~#1 of the paper}
+\newcommand{\paperfig}[1]{Figure~#1 of the paper}
+\newcommand{\papercite}[2]{[#2] of the paper}
+
+\title{Supplementary material\\[6pt]
+\large \papertitle}
+\author{\paperauthor}
+\date{\paperdate}
+
+\begin{document}
+\maketitle
+\supplementnumbering
+\input{supp/supp_body}
+\end{document}

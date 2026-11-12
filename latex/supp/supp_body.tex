@@ -1,0 +1,212 @@
+% Supplementary material: body. Used by supplement.tex (on its own) and full.tex (after the paper).
+% Every table is written by supp/build_supp.py or supp/reproduce.py (gen/s_*.tex). Every number in the prose is a macro
+% written by those scripts (gen/supp_macros.tex, gen/repro_macros.tex, gen/gate_macros.tex) or restates a sentence of
+% the paper; supp/gates_text.tex names the few numbers that come from recorded screen analyses.
+\input{gen/supp_macros}
+\input{gen/repro_macros}
+\input{gen/gate_macros}
+
+\section{What this supplement holds}\label{sec:s-guide}
+
+The paper reports the case study of \papersec{6} and the applications of the pass rule of \papersec{5} in a few lines
+each. This supplement gives the full results behind those lines (Sections~\ref{sec:s-case} and~\ref{sec:s-gates}),
+recomputes the case study with the released kit (Section~\ref{sec:s-repro}) and describes the released data
+(Section~\ref{sec:s-data}).
+
+\paragraph{How the numbers were produced.}
+No table cell here was typed by hand. One script reads the result rows of the case study and its frozen analysis
+report (sha256 \texttt{\expandafter\seqsplit\expandafter{\SReportSha}}). From the rows it recounts the solved runs per arm and repeat, the
+difference of every task, the sum of every repository and the request counts, and it stops if any recount differs
+from the report. Only then does it write the tables, the numbers used in the text and the data files. The figures are
+drawn from the released data files alone.
+
+\paragraph{Terms.}
+A \emph{run} is one attempt of the agent at one task, in one arm and one repeat. A run is \emph{solved} if the tests of
+the task pass on the edits the run left. A \emph{slot} is one combination of task, arm and repeat. \emph{Points} are
+percentage points of solve rate. A \emph{task-equivalent} is four solved runs, that is, one task solved in all four
+repeats.
+
+\section{The case study in full}\label{sec:s-case}
+
+\subsection{Design}
+
+Five arms run one withheld agent bundle against one model server (\papertab{4}). Arm F reproduces the scorer path.
+Each other arm departs from it in one way: in R, tool results carry the role \texttt{tool\_responses}; in C, history
+compaction is unset; in H, the thoughts of earlier turns are removed from every request; in T, the Hugging Face
+template of the model replaces the Kaggle one. The panel has \STasks{} tasks in \SRepos{} repositories. Every task runs
+four repeats in every arm, which gives \SSlots{} slots, \SRunsPerArm{} per arm. For each task and repeat the five arms
+ran back to back in counterbalanced order. The analysis was frozen before any outcome was seen, and outcomes stayed
+blind until the registered cut-off.
+
+\subsection{Execution record}
+
+The first job started on \SFirstStart{} UTC and the last one ended on \SLastEnd{} UTC, before the cut-off
+(2026-11-11 06:00 UTC). The block ran as four batches and one batch of re-runs (Table~\ref{tab:s-batches}). Three
+batches stopped early, for the reasons in the last column, and each following batch started only jobs that had never
+started. In all, \SJobsStarted{} jobs were started: the \SAgentRows{} analysed runs and \SInfraRowsAll{} interrupted
+jobs. Of the interrupted jobs, \SInfraRowsWritten{} left an infrastructure row; the other \SInfraNoRow{}, all in
+batch~1, left none and are counted from the list of started jobs. Each interrupted slot was re-run once, so every slot
+has exactly one analysed run. The released file holds every written row.
+
+\input{gen/s_batches}
+
+\SLoadAbove{} of the \SLoadRows{} runs (\SLoadShare\%) took more than \SLoadThreshold{}~s of agent time. This is above
+the \SLoadFlag\% share that the protocol set as the sign of a loaded machine: from about an hour into the block a
+second workload held part of the memory of the GPU (\papersec{6}), so the times are under mixed load. No pre-emption
+was recorded.
+
+\subsection{Outcomes and solve rates}
+
+Table~\ref{tab:s-outcomes} splits the runs of each arm by how they ended and Table~\ref{tab:s-rates} gives the solve
+rates, which lie between \SMinRate\% and \SMaxRate\%. Two arms end differently from F. In C, \SCRejected{} runs
+(\SCRejectedShare\%) ended unsolved because a prompt grew past the server's limit and was rejected; no F run ended
+this way, and \SFCompactedShare\% of the F runs made at least one history summary. In H, \SHUnsolvedAtLimit{} runs
+(\SHUnsolvedAtLimitShare\%) were unsolved at the bundle's five-minute limit, against \SFUnsolvedAtLimit{}
+(\SFUnsolvedAtLimitShare\%) in F.
+
+\input{gen/s_outcomes}
+\input{gen/s_rates}
+
+Table~\ref{tab:s-taskhist} shows why a difference between arms is hard to detect on this panel: \STasksNever{} of the
+\STasks{} tasks were solved in no run of any arm and \STasksAlways{} in every run, so the other \STasksMixed{} tasks
+carry every difference.
+
+\input{gen/s_taskhist}
+
+\subsection{Primary analysis: tasks}
+
+For a task, let $K$ be the number of solved repeats in the arm minus the number in F, from $-4$ to $+4$. The estimate
+$d$ is the mean of $K/4$ over the \STasks{} tasks. Under the null hypothesis the arm and F are exchangeable within a
+task, so each $K$ is as likely to carry one sign as the other; the test compares $|\sum K|$ with its distribution
+over all sign assignments, computed exactly. Holm's method adjusts the four $p$-values. The intervals invert the same
+test under a constant shift, with \SReproDraws{} frozen Monte Carlo sign draws.
+
+No difference from F was detected for any arm (Table~\ref{tab:s-primary}, Figure~\ref{fig:s-taskdiff}). In every arm
+between \SNoDifferMin{} and \SNoDifferMax{} of the \STasks{} tasks have the same number of solved repeats as in F. The
+largest estimate is that of H: \SHTasksDown{} tasks have fewer solved repeats than in F and \SHTasksUp{} have more,
+which gives $-\SHd$ points with exact $p = \SHp$ and Holm-adjusted $p = \SHHolm$. These are null results, not
+evidence of no effect. The simultaneous 98.75\% intervals show what the experiment cannot exclude: a drop of up to
+\SHSimLo{} points (H) and a gain of up to \STSimHi{} points (T).
+
+\input{gen/s_primary}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{fig/supp_taskdiff.pdf}
+\caption{Tasks whose number of solved repeats differs between an arm and F. Bars to the left of the centre line are
+tasks with fewer solved repeats in the arm.}
+\label{fig:s-taskdiff}
+\end{figure}
+
+\subsection{Secondary analysis: repositories}
+
+Tasks of one repository tend to succeed and fail together, so the registered secondary analysis takes the \SRepos{}
+repositories as its units (Table~\ref{tab:s-repolevel}). Table~\ref{tab:s-repos} and Figure~\ref{fig:s-repos} show
+each repository. All four repository-level intervals include zero, and the smallest two-sided $p$ is \SMinRepoP{} (H).
+The leave-one-repository-out estimates of H stay negative ($-\SHLooLo$ to $-\SHLooHi$ points), so no single
+repository produces the estimate of H; those of R, C and T change sign.
+
+\input{gen/s_repolevel}
+\input{gen/s_repos}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{fig/supp_repos.pdf}
+\caption{Change against F in each repository, per arm. Repositories are ordered by their number of tasks.}
+\label{fig:s-repos}
+\end{figure}
+
+\subsection{Sensitivity analyses}
+
+Three sensitivity analyses were registered with the primary one (Table~\ref{tab:s-sens}). The first treats the runs
+that were unsolved at the five-minute limit as missing, in both arms; the estimate of H is then $\SHTimeCapMissing$
+points ($p = \SHTimeCapMissingP$) instead of $-\SHd$. The other two score as unsolved every slot whose first job was
+interrupted, in the arm or in F. No sensitivity analysis gives a $p$-value below 0.05.
+
+\input{gen/s_sens}
+
+\subsection{Exposure and the prompt check}
+
+A divergence can only matter in the requests it changes. The frozen checker re-rendered all \SRequests{} returned
+requests from the request dumps of the jobs. For each of the \SChecksPassed{} analysed runs it confirmed that the
+prompts carry the divergence of the run's arm and no other difference; \SChecksFailed{} runs failed the check. The
+divergence changed \SExposureMin{} to \SExposureMax\% of the requests in R, H and T, and \SCChanged\% in C
+(Table~\ref{tab:s-exposure}).
+
+\input{gen/s_exposure}
+
+\subsection{Exploratory run measures}
+
+Table~\ref{tab:s-measures} compares thirteen measures of a run between each arm and F. These comparisons were not
+part of the registered tests and are not adjusted for multiplicity. H runs are longer: \SHTimeMean{}~s of agent time
+on average against \SFTimeMean{}~s in F (medians \SHTimeMedian{} and \SFTimeMedian{}~s; Figure~\ref{fig:s-time}), with
+\SHTokOut{} completion tokens per run against \SFTokOut.
+
+\input{gen/s_measures}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=\linewidth]{fig/supp_time.pdf}
+\caption{Agent time per run: each arm (blue) against F (grey).}
+\label{fig:s-time}
+\end{figure}
+
+\section{Applications of the pass rule}\label{sec:s-gates}
+
+\begin{figure}[!tb]
+\centering
+\includegraphics[width=\linewidth]{fig/supp_gates.pdf}
+\caption{Gain of each repository in the three applications of the pass rule (candidate minus baseline). Repositories
+are sorted by their total within each application.}
+\label{fig:s-gates}
+\end{figure}
+
+\input{gen/s_gates}
+
+\input{supp/gates_text}
+
+\section{Recomputing the case study with the released kit}\label{sec:s-repro}
+
+The released table \texttt{e8\_compare\_table.csv} is in the input format of the \texttt{compare} module of the kit.
+From a clone of the repository, two commands recompute the analysis:
+
+\begin{verbatim}
+pip install "./drydock-eval[compare]"
+drydock-eval compare signflip e8_compare_table.csv --reference F --repeats 4
+\end{verbatim}
+
+We ran this command from the released source tree with the script \texttt{supp/reproduce.py}, which stops on any
+mismatch. For all four arms the command returned the registered estimate, the exact $p$ as the same fraction, the
+Holm-adjusted $p$ and every repository-level quantity of Table~\ref{tab:s-repolevel}.
+
+Two quantities depend on Monte Carlo draws: the inverted intervals, and the Monte Carlo $p$ that is reported next to
+the exact one. The draws are frozen (seed \SReproSeed), but which draw meets which task depends on the order of the
+tasks. The registered analysis used the order of the panel file; the command sorts the task identifiers. With the
+tasks in panel order, the routine of the kit returns the registered values to the last digit
+(Table~\ref{tab:s-repro}). With the order of the command, the ends of the 95\% intervals move by at most
+\SReproMoveNinetyFive{} points and those of the simultaneous intervals by at most \SReproMoveSim{} points. The largest
+move is the upper end of the interval of H, $+\SReproHCmdHi$ instead of $+\SReproHRegHi$ points. The $p$-value of the
+test is a step function of the shift, and across that stretch it stays between \SReproStepLo{} and \SReproStepHi{},
+next to the 0.05 it is compared with. Both intervals include zero. The paper reports the registered intervals.
+
+\input{gen/s_repro}
+
+\section{Released data and code}\label{sec:s-data}
+
+Table~\ref{tab:s-files} lists the data files and Table~\ref{tab:s-columns} the columns of the run file.
+
+\paragraph{What the files hold.}
+Outcome rows and analysis results only. They hold no prompt, request, patch, test output, error text or machine
+detail: the script copies a fixed list of fields by name and nothing else.
+
+\paragraph{What is withheld.}
+The agent bundle, its prompts and the request dumps of the jobs stay private for now; their release is planned for
+2026-12-03 (\papersec{9}). For that reason the two arms of each pass-rule application are named baseline and candidate.
+
+\paragraph{Where.}
+The kit is at \url{\repourl} (tag \texttt{v0.4.0}, Apache-2.0). The branch \texttt{paper} of the same repository holds
+the sources of the paper and of this supplement, the scripts that write its tables and figures, and the data files
+with their checksums.
+
+\input{gen/s_files}
+\input{gen/s_columns}

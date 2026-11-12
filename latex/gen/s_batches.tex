@@ -1,0 +1,16 @@
+\begin{table}[!htb]
+\centering
+\caption{Execution record: the block ran as four batches and one batch of re-runs. An interrupted job is an infrastructure row, with or without a written result row; its slot was re-run once.}\label{tab:s-batches}
+\footnotesize
+\begin{tabular}{rrrrrl}
+\toprule
+Batch & \parbox[b]{1.2cm}{\raggedleft Jobs started} & \parbox[b]{1.4cm}{\raggedleft Analysed runs} & \parbox[b]{1.9cm}{\raggedleft Interrupted, row written} & \parbox[b]{1.9cm}{\raggedleft Interrupted, no row} & How the batch ended \\
+\midrule
+1 & 967 & 959 & 0 & 8 & runner reached its open-file limit \\
+2 & 378 & 370 & 8 & 0 & external termination signal \\
+3 & 3{,}074 & 3{,}066 & 8 & 0 & model server ended (out of memory) \\
+4 & 201 & 201 & 0 & 0 & job list completed \\
+5 & 24 & 24 & 0 & 0 & re-runs of the interrupted jobs completed \\
+\bottomrule
+\end{tabular}
+\end{table}

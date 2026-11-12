@@ -1,0 +1,182 @@
+\section{Experiments with E4B}\label{sec:small}
+
+E4B generates \ServeRatioSmallBig{} times as many tokens per second as the 31B model on the scorer's hardware
+(\cref{sec:serving}), and a separate prize of the competition is reserved for the small models. Most runs of this
+paper, \RunsEFour{} of \RunsTotal{}, are E4B runs. This section reports what we measured before any candidate change was tested: the first
+runs on hosted notebooks, the controls of the grading path, the agreement between the workstation and the hosted
+notebook, how far the unchanged baseline repeats, where it succeeds and fails, and what a run costs. The three
+programmes that tried to improve the baseline follow in \cref{sec:programmes}.
+
+\subsection{First experiments on hosted notebooks}\label{sec:small-first}
+
+\input{gen/tab_smallfirst}
+
+\paragraph{Development tasks.}
+The first block (\texttt{pubE4-1}, \cref{tab:smallfirst}) ran three E4B arms on 24 development tasks with small
+reference fixes, from three of the four repositories: a single agent (\arm{e-single}), the wrapped design of
+\cref{sec:big-arms} (\arm{e-wrap}), and the wrapped design with a fine-tuned adapter on the coder (\arm{e-wrap-ad}).
+Each arm solved 5 of the 24 tasks. The arms largely solved the same tasks: \SmallPubAllThree{} tasks were solved by all
+three and \SmallPubUnion{} by at least one. On these 24 tasks the 31B arms \arm{BF5} and \arm{SH6} had solved
+\SmallPubBigBF{} and \SmallPubBigSH{}, each in one run per task on the emulated-latency machine. The block therefore shows the size of the gap
+between the two models on tasks chosen to be easy, and no difference between a single agent, a wrapped agent and an
+adapter. With one run per task and five solved tasks per arm, it could only have shown a very large difference. A job
+took \SmallPubWall{}~s on average and used about \SmallPubTools{} tool calls: E4B stops by itself, far inside every
+limit of the scorer.
+
+\paragraph{Berth tasks.}
+The second block (\texttt{berthE4-k1}) is the first on Berth tasks: 24 tasks, two repeats, and two arms in one job
+queue. \arm{e-BF} is the public single-agent prompt adapted to E4B; \arm{base} is the withheld E4B agent bundle that
+we later submitted. \arm{base} solved 8 of 48 runs and \arm{e-BF} 4 of 48. By task, \arm{base} was ahead on
+\KOneBaseBetter{} tasks and behind on \KOneOtherBetter{} (sign test, $p = \KOneP$); no difference was detected. We
+kept \arm{base} as the baseline of every later comparison. This block is not evidence that it is the better of the
+two; it is the bundle we meant to submit, and it was not behind.
+
+The third block (\texttt{berthE4-k2}) compared four arms on eight tasks, one from each of \KTwoRepos{} repositories,
+with two repeats: \arm{base}, \arm{base} with one prompt change (\arm{base-p}), \arm{e-BF}, and \arm{e-BF} with
+changed sampling settings (\arm{e-BF-s}). They solved 7, 6, 5 and 2 of 16 runs. The intervals of
+\cref{tab:smallfirst} overlap widely, and we drew one conclusion only: 16 runs per arm on a hosted notebook cannot
+rank prompt variants of this model. The eight tasks share no task with the 24 of the second block, and the record
+does not say how they were picked. \arm{base} solved 44\% of its runs on them, twice its share elsewhere, so the block
+says nothing about the level of any arm. Neither \arm{base-p} nor \arm{e-BF-s} was run again.
+
+These three blocks hold 232 runs. All later E4B experiments ran on the workstation, where the same number of runs
+takes about an hour.
+
+\subsection{Task pool and grading controls}
+
+\input{gen/tab_controls}
+
+A solved share means something only if the grading path separates a correct fix from no fix. Before any agent ran on
+a task, the task was graded twice: once with its reference patch, which must pass, and once with no patch, which must
+fail (\cref{tab:controls}). On the workstation, without a container, the reference patch passed on all
+\PoolTasks{} tasks that loaded, from \PoolRepos{} repositories, and the empty patch passed on \PoolEmptyPass{}; that
+task was removed, which leaves the \PoolValid{} tasks of \cref{sec:setting}. The controls were then repeated under the
+final container runner for every panel used in this paper, and on CPU notebooks of the hosting platform for
+\HostedCtrlRef{} tasks with the reference patch and \HostedCtrlEmpty{} with the empty patch. Every one of these
+controls gave the expected result. \CtrlPairsMulti{} pairs of task and control were graded on more than one machine or
+runner, and \CtrlPairsDisagree{} of them changed its result. The file \texttt{controls.csv} holds all \ControlRows{}
+rows.
+
+The controls test the grader, not the agent's environment. They would not show a difference in what the agent sees
+while it works, for example a different Python version in its shell; \cref{sec:parity} addresses that side.
+
+\subsection{Workstation against the hosted notebook}\label{sec:parity}
+
+\input{gen/tab_parity}
+
+The workstation serves the model from one GPU instead of four, runs jobs in parallel, and puts each job in a
+container. Any of these could change what the agent does. \Cref{tab:parity} lists every run of the baseline on the
+same 24 Berth tasks, one run per task: two repeats on the hosted notebook with four L4 GPUs, and seven runs on the
+workstation as the runner changed. The first two workstation runs used no sandbox and still had the role divergence
+described in \cref{sec:intro}; the others used the container runner in four of its versions.
+
+The hosted repeats solved 4 and 4 of 24. The workstation runs solved between \ParityMin{} and \ParityMax{}, in total
+\ParityWsTotal{} of \ParityWsRuns{} runs (\ParityWsPct\%) against \ParityHostedTotal{} of 48 (\ParityHostedPct\%) on
+the hosted notebook. Over all 216 runs only six distinct tasks were ever solved, so the totals move because the same
+few tasks come out or not, not because a runner opens or closes other tasks. The mean agent phase took 79 and 80~s on
+the hosted notebook and 58 to 83~s on the workstation. Figure~\ref{fig:parity}A shows the difference of each
+workstation run from the hosted share; it includes an eighth run, under runner version 2, whose rows were not kept.
+
+What this supports is limited. With 24 tasks and one run each, the 95\% interval of 4 of 24 runs from 7\% to 36\%.
+The table rules out a gross difference between the machines, such as the workstation solving half or double the
+hosted share. It cannot show that a specific difference in the prompts has no effect. That question needs an
+experiment with power, and \cref{sec:case} reports one.
+
+\subsection{How far the baseline repeats}
+
+\input{gen/tab_repeat}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig/repeat.pdf}
+\caption{The unchanged E4B baseline on the workstation. Left: solved runs of each session on the same tasks, with
+95\% intervals. Right: the 128 tasks of panel H by the number of baseline runs that solved them, of eight runs in two
+sessions.}
+\label{fig:repeat}
+\end{figure}
+
+Every screen and every confirmation block ran the baseline in the same job queue as the candidates. The baseline
+therefore ran three times on the 48 tasks of S and twice on the 128 tasks of H, in separate sessions
+(\cref{tab:repeat,fig:repeat}). On S it solved 19, 21 and 20 of 96 runs; on H,
+\RepeatHFirst{} and \RepeatHSecond{} of 512. The session totals differ by at most \RepeatSRange{} points on S and by
+\RepeatHDiff{} points on H.
+
+Repeats of one task can differ. They rarely do. On H, \HNever{} of the
+128 tasks (\HNeverPct\%) were solved in none of the eight baseline runs and \HAlways{} in all eight; only \HBetween{}
+tasks were solved in some runs and not in others. The per-task solved counts of the two sessions correlate at 0.92.
+Because so few tasks are uncertain, the run-to-run standard deviation of the total is small. Estimated from the
+variation within tasks, it is \NoiseSdRuns{} runs of 512, or \NoiseSdPts{} points, for one arm and \NoiseSdDiffPts{}
+points for the difference of two arms on the same tasks. The two baseline sessions differ by
+\BaseSessionsDiffRuns{} runs, which is \BaseSessionsNoiseRatio{} of that standard deviation; the one pair of repeats
+that we have does not contradict the estimate. The binomial formula, which treats the 512 runs as independent with one
+common probability of \HBasePct\%, gives \NoiseSdBinomPts{} points; the variation within tasks accounts for
+\NoiseShare\% of that variance. \Cref{sec:analysis} uses these numbers.
+
+\subsection{Repositories}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig/repos.pdf}
+\caption{Solved share of the E4B baseline by repository, over all its runs in the screen and confirmation blocks, with
+95\% intervals that treat runs as independent. Numbers of tasks and runs are in \cref{tab:repos}.}
+\label{fig:repos}
+\end{figure}
+
+\input{gen/tab_repos}
+
+Over the screens and confirmations, the baseline ran \BaseWsRuns{} times on \BaseWsTasks{} tasks from \BaseWsRepos{}
+repositories and solved \BaseWsSolved{} runs (\BaseWsPct\%). \Cref{tab:repos,fig:repos} split this by repository. The
+share runs from \RepoTopPct\% in the best repository to zero in \RepoZero{} repositories; the three repositories with
+the most solved runs hold \RepoTopThreeShare\% of all solved runs. The zero rows have one to three tasks each, so
+they say little about those repositories. The wider pattern is firm, though: with 10 to 24 tasks each, the shares of
+the larger repositories still range from 7\% to 34\%.
+
+Two consequences follow. A change that helps in one repository can move the total visibly while doing nothing
+elsewhere, which is why the pass rule of \cref{sec:compare} counts repositories and tests with repositories as
+clusters. And a local total is a property of the repository mix as much as of the agent: the hidden tasks of the
+scorer need not come from these repositories, and nothing here says how the baseline does on them.
+
+\subsection{Time, tokens and failure kinds}\label{sec:cost}
+
+\input{gen/tab_cost}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig/time_dist.pdf}
+\caption{Time of solved and unsolved runs for the two models. E4B: agent phase of the Berth runs on the workstation.
+31B: whole job of the development-task runs under emulated latency.}
+\label{fig:time}
+\end{figure}
+
+\Cref{tab:cost} gives time, tokens and endings for every setting in which agent runs were made, and \cref{fig:time}
+the distribution of time for the two largest groups.
+
+\paragraph{E4B is quick, and quicker when it succeeds.}
+On the workstation the agent phase of an E4B run took \CostSmallMean{}~s on average: \CostSmallSolvedT{}~s when the
+task was solved and \CostSmallUnsolvedT{}~s when it was not. The 31B runs on development tasks took
+\CostBigMean{}~s, with \CostBigSolvedT{}~s and \CostBigUnsolvedT{}~s. The time limit ended 12.6\% of the 31B runs
+and 0.3\% of the E4B runs. For the 31B model the limit is a working constraint, and the arms of \cref{sec:big} differ
+mostly in how they spend it. For E4B it is not: more time would change almost nothing.
+
+\paragraph{E4B fails by handing in a wrong fix.}
+Of the \WsUnsolved{} unsolved E4B runs on the workstation, \WsUnsolvedNormalPct\% ended because the agent declared its
+work finished. \WsUnsolvedWrongPct\% handed in a patch that the tests rejected, \WsUnsolvedEmptyPct\% left no patch,
+and \WsUnsolvedTimeoutPct\% ran into the time limit. The typical failure is thus a wrong fix handed in after about a
+minute and a half, not a run that was cut off. The three programmes of \cref{sec:programmes} accordingly changed what
+the agent does within a run (its prompt, the way it edits files, an added agent step) and left the limits alone,
+with one exception, an arm with a changed thinking-token limit.
+
+\paragraph{Both models on the same tasks.}
+\CommonTasks{} Berth tasks, all in S, were run with both models: with five 31B arms, the public
+configurations and variants of them, on four L4 GPUs (\cref{sec:big}), and with the E4B baseline in the three screens on the workstation.
+The 31B arms solved \CommonBigSolved{} of \CommonBigRuns{} runs (\CommonBigPct\%) and the E4B baseline
+\CommonSmallSolved{} of \CommonSmallRuns{} (\CommonSmallPct\%). The 31B arms solved \CommonBigTasks{} of the tasks at
+least once and E4B \CommonSmallTasks{}; no task was solved by E4B only. An average run took \CommonBigMean{}~s
+against \CommonSmallMean{}~s, so the agent time spent per solved run is of the same order: \CommonBigPerSolved{}~s for
+the 31B arms and \CommonSmallPerSolved{}~s for E4B. The comparison mixes machines and arms and covers 26 tasks; we
+read it as a description, not as a test. It does say that the small model is not cheaper per solved task. It is
+cheaper per attempt, and it reaches fewer tasks.
+
+\paragraph{Totals.}
+The \RunsWorkstation{} E4B runs on the workstation took \WsAgentHours{} hours of agent time in total, spread over
+parallel workers, and used \WsTokensInM{} million prompt tokens and \WsTokensOutM{} million generated tokens.

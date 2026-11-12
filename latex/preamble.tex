@@ -1,0 +1,35 @@
+% Shared by main.tex (the paper), supplement.tex (the supplement on its own) and full.tex (both in one file).
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{seqsplit}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\captionsetup{font=small,labelfont=bf}
+\setlist{itemsep=1pt,topsep=3pt}
+\providecommand{\tightlist}{\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}}
+% pandoc column widths, (\linewidth - 2n\tabcolsep) * \real{share}, need calc
+\setlength{\emergencystretch}{2em}
+
+\input{gen/meta}
+\newcommand{\paperauthor}{Nguyen Minh Thang\\
+\small VNU University of Science, 334 Nguyen Trai, Thanh Xuan, Hanoi, Vietnam}
+\newcommand{\paperdate}{November 2026}
+\newcommand{\repourl}{https://github.com/MinhThanghus/drydock-eval}
+
+% The supplement numbers its sections, tables and figures S1, S2, ... in every build.
+\newcommand{\supplementnumbering}{%
+  \setcounter{section}{0}\setcounter{table}{0}\setcounter{figure}{0}%
+  \renewcommand{\thesection}{S\arabic{section}}\renewcommand{\thetable}{S\arabic{table}}\renewcommand{\thefigure}{S\arabic{figure}}%
+  \renewcommand{\theHsection}{S\arabic{section}}\renewcommand{\theHtable}{S\arabic{table}}\renewcommand{\theHfigure}{S\arabic{figure}}}

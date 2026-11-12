@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{The same arm and tasks on real 4$\times$L4 hardware (serial jobs) and under latency emulation (eight workers). Wall: mean seconds per job.}
+\label{tab:lfour}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Arm & Tasks & Solved, L4 & Solved, emul. & Both & Only L4 & Only emul. & Wall, L4 & Wall, emul. & Diff. \\
+\midrule
+\texttt{SH5} & 10 & 6 & 3 & 3 & 3 & 0 & 280 & 292 & \ensuremath{-}4\% \\
+\texttt{SH6} & 24 & 14 & 17 & 14 & 0 & 3 & 289 & 314 & \ensuremath{-}8\% \\
+\bottomrule
+\end{tabular}
+\end{table}

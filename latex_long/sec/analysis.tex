@@ -1,0 +1,129 @@
+\section{Cross-experiment analysis}\label{sec:analysis}
+
+The experiments of \cref{sec:big,sec:small,sec:case,sec:programmes} share one task pool, one runner and, for E4B, one
+baseline. This section reads across them. It asks how large the noise of each kind of comparison is, which tasks can
+move at all, what a hosted score adds to a local result, and what the record implies for the test of a further
+candidate. Every analysis in this section was chosen after the results were known. None of them changes a registered
+verdict.
+
+\subsection{Three comparisons and their noise}\label{sec:noise}
+
+\begin{table}[t]
+\centering
+\caption{Standard deviation of the difference of two arms that run on the same tasks, from run-to-run variation
+alone. The first two rows are estimated from the repeated baseline sessions (\cref{sec:small}); the third row uses
+the repeated public draws of unchanged 31B files \citep{afshar2026census}.}
+\label{tab:noise}
+\footnotesize
+\begin{tabular}{lrrl}
+\toprule
+Comparison of two arms & Runs per arm & SD, points & Time as run \\
+\midrule
+Screen on S (48 tasks, 2 repeats) & 96 & \ScreenSdDiffPts{} & 1--2 hours (3--6 arms) \\
+Confirmation on H (128 tasks, 4 repeats) & 512 & \NoiseSdDiffPts{} & about 3 hours (2 arms) \\
+Hosted, one draw per file (58 public tasks) & 58 & \HostedSdDiffPts{} & 2 days \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\Cref{tab:noise} puts the three comparisons that we used side by side. All three hold the tasks fixed, so the numbers
+answer one question only: would the difference appear again if the same two builds ran again on the same tasks? For
+that question a confirmation block on the workstation is the most exact instrument that we have, and a pair of hosted
+scores is the least exact.
+
+The pass rule asks a harder question: would the gain hold on tasks from repositories that the block did not contain?
+Its test resamples repositories, and its answer can differ widely from the answer for fixed tasks. The third
+application shows the size of that difference. The candidate solved \CandThreeDiffRuns{} more runs than the baseline,
+a gain of $\GainThree$ points. Against run-to-run noise alone this is \CandThreeNoiseRatio{} standard deviations.
+Under the repository-clustered test the one-sided $p$ is \GatePThree{}, above the limit of 0.025
+(\cref{sec:leadgain}). Both statements are correct. The first says that the two builds very probably differ on the
+128 tasks of H. The second says that the 19 repositories of H do not yet show that the gain carries over to other
+repositories.
+
+A third source of error is selection. The candidate that enters a confirmation is the leader of a screen, and the
+leader of several equal arms is ahead by construction: \ScreenNullLeadFive{} points on average when five variants are
+screened against the baseline, and \ScreenNullLeadTwo{} points when two are (\cref{sec:leadgain}). A reader who compares a screen
+lead with \cref{tab:noise} must subtract this first.
+
+\subsection{Tasks that the small model does not solve}\label{sec:never}
+
+On most tasks the outcome of an E4B run does not depend on the run, and it does not depend on the arm. The baseline
+solved \HNever{} of the 128 tasks of H in none of its eight runs. Each of these tasks was also run eight times by the
+two candidates that were tested on H. They solved \HNeverRescued{} of them at least once, in \HNeverRescuedRuns{} of \HNeverCandRuns{}
+runs; \HNeverAny{} tasks stayed unsolved in all 16 runs. On the screen set S the baseline never solved \SNeverBase{}
+of 48 tasks in six runs, and \SNeverAny{} tasks stayed unsolved in the 24 runs of all arms of the three screens. Over
+all E4B runs on the workstation, \WsTasksAny{} tasks were attempted, each in \WsRunsPerTaskMin{} to
+\WsRunsPerTaskMax{} runs. \WsTasksSolvedAny{} of them were solved at least once. The other
+\WsTasksNeverPct\% were never solved.
+
+``Never'' is a statement about our runs. A task that is solved in one run of ten stays unsolved in eight runs with a
+probability of 43\%. The few candidate runs that solved a task of the never-solved group are therefore what such tasks
+would give without any change to the agent, and we do not read them as tasks that a candidate opened.
+
+Two consequences follow. First, the changes that we tested act on a minority of tasks. Even the largest gain,
+that of the third candidate, changed the solved count of \CandThreeTasksUp{} tasks upwards and of \CandThreeTasksDown{}
+tasks downwards, and left \CandThreeTasksSame{} of 128 as they were. Second, the task set fixes most of a solved share before any arm
+runs. The share of tasks that some arm solved in some run, \WsTasksSolvedAny{} of \WsTasksAny{}, is about twice the
+baseline's solved share of runs (\BaseWsPct\%). It bounds what any choice among our variants could reach on these
+tasks. \Cref{sec:cost} showed how the failures look: in \WsUnsolvedWrongPct\% of the unsolved workstation runs the
+agent handed in a patch that the tests reject, and in \WsUnsolvedTimeoutPct\% it was stopped by the time limit.
+
+\subsection{What a hosted score adds}\label{sec:hostednoise}
+
+\paragraph{Precision.}
+The census of repeated public draws gives a standard deviation of \HostedSdTasks{} tasks of 58 for one draw of
+unchanged 31B files (our recount of its 29 draws of six file sets). The difference of two submissions then has a
+standard deviation of \HostedSdDiffPts{} points. To detect a gain of two tasks of 58 with a power of 80\% at a
+one-sided level of 0.025, each of the two files would need about \HostedDrawsNeeded{} draws. At one submission per
+day this is twenty days for one comparison. The difference of two arms in one confirmation block has about
+\LocalBlockRatio{} times less run-to-run variance than the difference of two single hosted draws, and the block takes
+three hours. For E4B files no repeated draws exist, so the first number is not known for the small model.
+
+\paragraph{Relevance.}
+The hosted score is measured on the tasks that decide the competition. Local runs are not. For the four arms with at
+least 70 local runs, the hosted score is between \HostedRatioMin{} and \HostedRatioMax{} of the local solved share
+(\cref{tab:hosted}): 0.12 and 0.18 against 54\% and 53\% of the development tasks for the two 31B arms, and 0.06
+and 0.05 against 20\% and 23\% of Berth runs for the two E4B arms. The hidden tasks need not resemble either local
+set. The development tasks are public, and the Berth tasks are those that load and pass validation. We did not test
+which of these reasons accounts for the gap.
+
+\paragraph{Order.}
+We have two pairs of arms with both a local and a hosted result. \arm{W3} and \arm{BF5} tied locally (38 and 37 of
+70) and scored 0.12 and 0.18. The third E4B candidate was ahead of the baseline locally by $\GainThree$ points and
+scored 0.05 against 0.06. In both pairs the hosted order is the reverse of the local order. The hosted difference of
+the 31B pair is about one and a half standard deviations of a difference of single draws (\cref{sec:hosted}); that
+of the E4B pair is 0.01. Neither can be told from noise. Two pairs cannot show whether a local gain carries over to
+the hidden tasks. They show that one hosted draw per arm cannot answer the question.
+
+\subsection{Time limits and the two models}\label{sec:limits-models}
+
+The time limit of a session shapes the results of the large model and hardly touches the small one. On the development
+tasks under emulated latency, \TimeoutBigDevPct\% of the 31B runs were stopped by the limit; on Berth tasks on
+4$\times$L4, \TimeoutBigBerthPct\%. Of the E4B runs on the workstation, \TimeoutSmallWsPct\% were stopped by the time
+limit and \BudgetSmallWsPct\% by the limit on tool calls (\cref{tab:cost}). For 31B the limit binds in about one
+run of eight, so the way an arm uses its time is part of its result. The first wrapped arm, for example, finished its
+jobs sooner than the reference because it wrote no history summaries (\cref{sec:big-arms}). For E4B, time is not the
+binding limit. The three candidates used \RecheckTimeOne{}, \RecheckTimeTwo{} and \RecheckTimeThree{} times the
+agent time of the baseline, inside the factor of 1.2 that the pass rule allows. With so few runs stopped by a limit,
+a faster E4B agent could gain at most that fraction of runs. A change that helps must alter the patch that the agent
+submits.
+
+\subsection{What the record implies for a further candidate}\label{sec:next}
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt,topsep=3pt]
+\item \textbf{Confirmations are the scarce resource.} A screen costs an hour and ranks nothing
+(\cref{sec:leadgain}). A confirmation costs about a thousand runs and three hours, and it spends its panel: H has
+been used twice, and the third candidate was built after the first result on H was known.
+\item \textbf{The validated pool is nearly used up.} Of the \PoolValid{} validated tasks, \PoolUsed{} have been
+used by some experiment of this paper. The remaining \PoolUntouched{} tasks lie in \PoolUntouchedRepos{}
+repositories; one repository holds \PoolUntouchedTopRepo{} of them and \PoolUntouchedSmallRepos{} repositories hold
+one task each. The pass rule asks for three repositories with a gain, so these tasks alone cannot carry a
+confirmation. A further \CaseOnlyTasks{} tasks were used only by the case study of \cref{sec:case}, which compared
+prompt renderings and no candidate. They can serve as a fresh panel only for a candidate whose design did not draw
+on the per-task results of that study.
+\item \textbf{The size of the panel sets the power.} For an even gain of three tasks of 58 the simulated pass rate
+of the rule is about 60\% on the small panel and about 90\% on the large one (\cref{tab:simulated}). A gain that is
+concentrated in few repositories passes far less often.
+\item \textbf{A hosted draw is a check of the file.} It shows that a bundle loads and runs under the scorer. It does
+not show which of two bundles is better (\cref{sec:hostednoise}).
+\end{enumerate}

@@ -1,0 +1,44 @@
+% Figure: where the three modules sit. Every label restates Sections 3-5; no number here is new.
+\begin{figure}[!tb]
+\centering
+\footnotesize
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, inner sep=4pt, text width=#1, minimum height=0.95cm},
+  con/.style={box=#1, fill=blue!8},
+  cfm/.style={box=#1, fill=green!12},
+  cmp/.style={box=#1, fill=orange!16},
+  plain/.style={box=#1, fill=white},
+  arr/.style={-{Stealth[length=1.8mm]}, thick},
+  darr/.style={{Stealth[length=1.8mm]}-{Stealth[length=1.8mm]}, thick},
+  lab/.style={font=\scriptsize, align=center, inner sep=1.5pt, text=black!75}]
+% row 1: what starts a job
+\node[plain=2.5cm] (jobs)   at (1.2,0)    {job list: task $\times$ arm $\times$ repeat};
+\node[con=3.9cm]   (runner) at (5.6,0)    {\textbf{runner} (trusted): starts agent runs only if eight recorded hashes match};
+% row 2: the job
+\node[lab, anchor=south] (ctrlab) at (5.05,-1.93) {one fresh container per job};
+\node[plain=2.25cm] (agent) at (3.6,-2.55) {agent: framework and bundle};
+\node[plain=2.25cm] (repo)  at (6.5,-2.55) {task repository and its tests};
+\node[lab, anchor=north, text width=5.5cm] (restr) at (5.05,-3.2)
+  {no network, no capabilities, seccomp filter, read-only root, unprivileged user; CPU, memory, process and file caps};
+\begin{scope}[on background layer]
+\node[draw, dashed, rounded corners=3pt, fill=blue!8, inner xsep=7pt, inner ysep=4pt, fit=(ctrlab)(agent)(repo)(restr)] (ctr) {};
+\end{scope}
+\node[con=2.45cm] (fwd) at (11.55,-2.55) {\textbf{forwarder}: chat requests only, allow-listed fields, approved template};
+\node[plain=1.75cm] (srv) at (14.75,-2.55) {model server on one GPU};
+% row 3: what reads the outputs
+\node[cmp=5.5cm] (cmpn) at (5.05,-6.0)  {\textbf{compare}: candidate against baseline on the same tasks and repeats; repository clusters; frozen pass rule};
+\node[cfm=5.2cm] (cfmn) at (13.15,-6.0) {\textbf{conform}: eight checks of requests and rendered prompts against the scorer path, down to token ids};
+% arrows
+\draw[arr] (jobs) -- (runner);
+\draw[arr] (runner.south) -- node[lab, right, xshift=1pt] {starts, grades} (runner.south |- ctr.north);
+\draw[darr] (repo.east) -- (fwd.west);
+\path (ctr.east |- repo.east) -- node[lab, above] {per-job} node[lab, below] {Unix socket} (fwd.west);
+\draw[arr] (ctr.south) -- node[lab, right, xshift=1pt] {verdict rows} (ctr.south |- cmpn.north);
+\draw[arr] (fwd.south) -- node[lab, left, xshift=-1pt] {requests} (fwd.south |- cfmn.north);
+\draw[arr] (srv.south) -- node[lab, right, xshift=1pt, text width=1.3cm] {rendered prompts} (srv.south |- cfmn.north);
+% module tag
+\node[lab, anchor=south west, text=blue!50!black] at ([yshift=1pt]runner.north west) {\textbf{contain}};
+\end{tikzpicture}
+\caption{The kit: where each module sits.}
+\label{fig:overview}
+\end{figure}

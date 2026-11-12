@@ -1,0 +1,17 @@
+\begin{table}[!htb]
+\centering
+\caption{Data files released with the paper.}\label{tab:s-files}
+\footnotesize
+\begin{tabular}{lrp{9.2cm}}
+\toprule
+File & Records & Content \\
+\midrule
+\texttt{e8\_runs.csv} & 4{,}636 & one line per result row of the case study: arm, task, repository, repeat, outcome, times, calls, tokens, prompt check \\
+\texttt{e8\_compare\_table.csv} & 4{,}636 & the same rows in the input format of \texttt{drydock-eval compare} (seven columns) \\
+\texttt{e8\_tasks.csv} & 231 & per task: repository and solved repeats (0 to 4) in each arm \\
+\texttt{e8\_repositories.csv} & 15 & per repository: tasks, solved runs per arm, summed change against F \\
+\texttt{e8\_summary.json} & -- & the analysis results behind Tables~\ref{tab:s-rates} to~\ref{tab:s-measures}, copied field by field from the frozen report \\
+\texttt{pass\_rule\_applications.json} & 3 & the applications of the pass rule (Table~\ref{tab:s-gates}) \\
+\bottomrule
+\end{tabular}
+\end{table}

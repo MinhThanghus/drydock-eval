@@ -1,0 +1,50 @@
+% written by scripts/reuse_short.py from the sources of the short paper; do not edit
+The pass rule of \papersec{5} was applied \SGateCount{} to a real candidate: a changed version of the withheld
+agent bundle, tested against the unchanged baseline on the same tasks and repeats. Each application ran once. Its rule,
+tasks and analysis script were frozen before its first job, and the outcomes stayed unread until the run had ended.
+Table~\ref{tab:s-gates} gives every quantity that the rule uses, and Figure~\ref{fig:s-gates} the gain of every
+repository.
+
+\paragraph{How the candidates were chosen.}
+Each candidate was the leader of a screen on one separate 48-task set, with two repeats per task: 576 runs over the
+baseline and five variants for the first candidate, and 288 runs over the baseline and two variants for each of the
+other two. Each leader solved more runs than the baseline in its screen (25, 22 and 25 of 96, against 19, 21 and 20).
+A screen selects a candidate and tests nothing, because the leader of several variants is expected to look better in
+its screen than it is. No task of the screens is among the tasks of an application. Two small pilots came before the
+screens of the later candidates. The variants of the second candidate were first tried on 15 tasks of the case-study
+panel, which shares no task with an application. Two predecessors of the third candidate were tried on 16 tasks of the
+small panel, that is, on tasks of the first application and on none of the second and third.
+
+\paragraph{Tasks and conditions.}
+The first application used the small panel (\SGateOneTasks{} tasks) and all five conditions of \papersec{5}. The
+second used the \SGateTwoTasks{} tasks of the large panel that are outside the small one. The third used the same
+\SGateThreeTasks{} tasks as the second, and both arms ran again. Its registration stated three things before the run:
+that this was the second use of that task set, that the candidate had run on none of these tasks, and that the
+candidate was built after the result of the second application was known. It also named two mechanical reads of
+earlier runs that went into a repair of the candidate and that may include runs on these tasks: a scan of the
+agent's commands in the \SGateTwoSessions{} runs of the second application, and the output of one command in six
+earlier runs. Neither read used whether a task was solved. The candidate had been submitted to the competition
+once before the run; its hosted score had not arrived when the outcomes were opened, and it is not an input of the
+rule. The second and third applications registered conditions (1) to (4) only.
+
+\paragraph{Results.}
+The rule asks for a mean gain of at least \SGateMinGain{} points with a one-sided $p$ of at most \SGateAlpha, and for
+further conditions on repositories, time and infrastructure errors. No candidate passed. The first two estimates are
+below zero: \SGateOneGain{} points (\SGateOneCand{} against \SGateOneBase{} solved runs of \SGateOneRuns; $p =
+\SGateOneP$) and \SGateTwoGain{} points (\SGateTwoCand{} against \SGateTwoBase{} of \SGateTwoRuns; $p = \SGateTwoP$).
+The third candidate solved \SGateThreeMore{} runs more than the baseline (\SGateThreeCand{} against \SGateThreeBase{}
+of \SGateThreeRuns), a gain of \SGateThreeGain{} points. This gain is above the required size, and conditions (3) and
+(4) are met: \SGateThreeReposUp{} of the \SGateThreeRepos{} repositories gain, \SGateThreeReposDown{} lose, and the
+lowest leave-one-repository-out gain is \SGateThreeLoo{} points. But the one-sided $p$ is \SGateThreeP, above
+\SGateAlpha, so condition (2) is not met and the decision is FAIL.
+
+\paragraph{How to read the decisions.}
+The verdict of a failed application is ``not confirmed''. It is not evidence that the candidate has no effect: the
+registration of the third application estimated, before the run, that a run of this size detects a true gain of the
+required size about half of the time. Nor do we call the third candidate an improvement. Its $p$ is not corrected for
+the three applications, and it is also above \SGateAlphaSplit, the level divided by three. Its gain is uneven: the
+three repositories with the largest totals hold \SGateThreeTopThreeTasks{} of the \SGateThreeTasks{} tasks and gain
+\SGateThreeTopThree{} task-equivalents, while the net gain over all repositories is \SGateThreeNet{}
+(Figure~\ref{fig:s-gates}). A gain concentrated in a few repositories is the case in which the rule has little
+power (\papertab{3}), and it is also what a few repositories can produce by chance. The first two leaders did not keep
+their screen lead on new tasks; this is consistent with the selection effect that the rule exists to catch.

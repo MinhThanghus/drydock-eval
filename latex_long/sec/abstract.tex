@@ -1,0 +1,19 @@
+\begin{abstract}
+A hosted score in the Gemma 4 Developer Agent competition \citep{googledeepmind2026competition} is one noisy number, so
+development needs a local evaluator that is fast, safe for agent-written code, and matching the hosted scorer's prompts.
+\kit{} evaluates a small coding agent (Gemma 4 E4B \citep{gemmateam2026gemma4}) at about 250 runs per hour on one RTX
+5090. \emph{Contain} runs each job in a fresh container without network and passed 200 scripted escape tests;
+\emph{conform} provides eight checks that compare a local stack's requests with the scorer's configuration, down to
+rendered tokens; \emph{compare} provides paired statistics that respect repository clusters. AI agents built and attacked
+the kit; a human owner approved machine use and release. This extended version repeats the short paper and adds the full
+record of the experiments made with and around the kit: \AllAgentRows{} rows of agent runs, \ControlRows{} grading
+controls and \ServeRows{} serving measurements, all released. On four L4 GPUs the 31B model decodes \ServeBigOne{}
+tokens per second in one stream and E4B \ServeSmallOne. Six configurations of a 31B agent solved between
+\PubMinSeventy{} and \PubMaxSeventy{} of 70 development tasks, and no pairwise difference was detected. A pre-registered
+five-arm experiment (231 tasks, 4,620 jobs) measured four prompt divergences: no E4B solve-rate change was detected
+(largest estimate $-$2.1 points, 95\% interval $-$4.4 to +0.4). Three changes of the E4B agent led their screens by
+\LeadTwo{} to \LeadOne{} points; each was then tested once on new tasks under a frozen pass rule, and none was
+confirmed (gains \GainOne, \GainTwo{} and \GainThree{} points). The unchanged baseline, run again on the same 128 tasks,
+moved by \RepeatHDiff{} points, and \HNeverPct\% of these tasks were solved in none of eight runs. Prompts and agent
+bundles are withheld; every run-level result is public.
+\end{abstract}

@@ -1,0 +1,44 @@
+\section{Related work}\label{sec:related}
+
+\paragraph{Benchmarks, agents and task pools.}
+Repository-level coding benchmarks grade an agent by running tests in an environment built for each task. SWE-bench
+holds 2,294 tasks from 12 Python repositories \citep{jimenez2024swebench}, and a human-validated subset of 500 tasks is
+in wide use \citep{openai2024swebenchverified}. Agent frameworks and training environments bring their own sandboxes
+and task pools \citep{yang2024sweagent,wang2025openhands,pan2025swegym,yang2025swesmith}, and SWE-rebench keeps
+collecting new tasks so that an evaluation can use tasks that a model has not seen
+\citep{badertdinov2025swerebench}. For this competition, Berth \citep{patel2026berth} and FreshSWE-Py
+\citep{moshegolderson2026freshswe} supply tasks in the format of the harness, and a third data set reports on the
+soundness of tasks together with local results \citep{gluzdov2026soundness}. We built no task set. All tasks of our
+experiments come from the competition's development set and from Berth, and we add grading controls for every Berth
+task that we used (\cref{tab:controls}).
+
+\paragraph{Evaluation practice.}
+Audits of agent benchmarks show that validity has to be checked and cannot be assumed \citep{zhu2025abc}, that scores
+move with the evaluation setup and with the format of the prompt \citep{biderman2024trenches,sclar2024formatting},
+and that agent evaluations are often hard to reproduce \citep{kapoor2024agentsthatmatter}. We address one narrow case
+of this: whether a local stack reproduces one hosted scorer. We compare prompts as token ids and not as message text,
+because equal strings need not give equal tokens \citep{agl2025retokenization} and because the control tokens of a
+chat template matter \citep{hf2026chattemplates}. The checks run on the serving engine of the scorer
+\citep{kwon2023vllm}. The prompt-construction divergences that we measure in \cref{sec:case} are documented upstream
+\citep{adk2026toolresponses,google2026gemma4prompt,dimondev2026hf44,gerganov2026hf135}. We did not discover them. We
+add executable checks for them and a measurement of their effect on E4B.
+
+\paragraph{Isolation.}
+MicroVMs \citep{agache2020firecracker} and user-space kernels \citep{young2019gvisor} are alternatives to plain
+containers that are built for security, and the overhead of the latter has been measured \citep{young2019gvisor}. Our
+runner uses plain containers; we tried neither alternative. Containers can consume resources outside their own
+accounting \citep{gao2019houdini}, which is the kind of route through shared host resources that our verifiers used
+(\cref{sec:contain}).
+\input{gen/short_related}
+
+\paragraph{Statistics of comparisons.}
+We follow the advice to treat an evaluation as an experiment, with clustered and paired errors and a power analysis
+\citep{miller2024errorbars}, and to size decisions to measured noise, as in signal-to-noise analyses of benchmarks
+\citep{heineman2025signalnoise}. The test of the pass rule is a wild cluster bootstrap-t over repositories
+\citep{cameron2008bootstrap} with Rademacher weights \citep{davidson2008wild}. Few or unbalanced clusters can break
+the nominal size of such tests \citep{mackinnon2017wild,canay2021wild}, and with few clusters only a small set of
+$p$-values can be attained \citep{webb2023reworking}; for that reason the rule's size and power were simulated on the
+frozen panels (\cref{tab:simulated}). The estimates of leaderboard noise for this competition come from third parties
+\citep{afshar2026census,mobassir2026toosmall}. What this version adds to them is the local counterpart: the run-to-run
+noise of one fixed agent on fixed tasks, measured by repeated sessions (\cref{sec:noise}), and three worked cases of
+a screen lead that was tested on new tasks (\cref{sec:leadgain}).
