@@ -61,7 +61,8 @@ pip install -e '.[test]'      # + pytest and numpy
   limits are in [Limits](#limits-read-before-relying-on-a-pass).
 - **`compare` holds its level only under its assumptions.** The simulated false-pass rate is at most 1.9% when tasks
   are exchangeable, about 8% when a candidate breaks a fifth of the repositories with no mean effect, and 30 to 40%
-  if tasks are dropped after outcomes are seen. The rule has not yet been applied to a real candidate.
+  if tasks are dropped after outcomes are seen. After release 0.4.0 was built, the rule was applied to three real
+  candidates; none passed (the supplement on the branch `paper` gives every quantity).
 - **Nothing here was measured on your stack.** Every number in this README was measured by the authors on their own
   hardware and task set; where the kit can reproduce it, the command is given, and where it cannot, the table says `none`.
 
@@ -981,7 +982,8 @@ them and compares on fresh random data.
 ### Limits
 
 - The rule's level holds for exchangeable tasks. It does not hold for skewed effects or for tasks dropped after
-  unblinding (the simulator shows by how much). The rule has not yet been applied to a real candidate.
+  unblinding (the simulator shows by how much). After release 0.4.0 was built, the rule was applied to three real
+  candidates; none passed (the supplement on the branch `paper` gives every quantity).
 - `gate` and `signflip` trust the table: they cannot tell whether a row was produced by the configuration its `arm`
   label names, or whether `row_class` was assigned before outcomes were seen.
 - The thresholds (2/58, 0.025, 1.2, two task-equivalents) were chosen for one leaderboard and one task set.
